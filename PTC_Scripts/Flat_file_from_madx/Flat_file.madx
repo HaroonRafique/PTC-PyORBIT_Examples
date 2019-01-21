@@ -38,7 +38,7 @@ seqedit, sequence=PS;
 	flatten;
 endedit;
 
-save,file='PS/PS.seq';
+save,file='input/PS.seq';
 
 use, sequence=PS;
 
