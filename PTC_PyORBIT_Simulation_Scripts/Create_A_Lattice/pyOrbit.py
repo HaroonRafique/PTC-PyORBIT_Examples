@@ -198,15 +198,15 @@ addTeapotDiagnosticsNodeAsChild(Lattice, parentnode, tunes)
 # This command will add one Teapot statlats node at start of each node 
 # in the lattice. In the output file we will have the columns:
 # (1) azimuthal position around ring, s [m]
-# (2) turn
-# (3) statistical horizontal beta_x [m]
-# (4) statistical vertical beta_y [m]
-# (5) statistical horizontal alpha_x [-]
-# (6) statistical vertical alpha_y [-]
-# (7) lattice horizontal beta_x [m]
-# (8) lattice vertical beta_y [m]
-# (9) lattice horizontal alpha_x [-]
-# (10) lattice vertical alpha_y [-]
+# (2) time
+# (3) emittance_x
+# (4) emittance_y
+# (5) beta_x [m]
+# (6) beta_y [m]
+# (7) alpha_x
+# (8) alpha_y
+# (9) D_x [m]
+# (10) dD_x
 # The output file requires tracking to be performed. Note that these
 # parameters will be printed at every node for every turn. For this
 # example we therefore only track one turn.
