@@ -2,6 +2,8 @@
 # Clean folder for this specific PTC-PyORBIT Example:
 # Flat_file_from_madx
 rm -r bunch_output
+rm lib/*.pyc
+rm lib/*.py~
 rm -r input
 rm -r lost
 rm -r output
