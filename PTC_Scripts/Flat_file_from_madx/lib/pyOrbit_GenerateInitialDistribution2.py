@@ -398,7 +398,7 @@ def generate_initial_distribution_from_tomo(parameters, matfile=0, Lattice=None,
 				y[i] += closedOrbity['y0']
 				yp[i] += closedOrbity['yp0']
 				dpp = dE[i] / (parameters['energy']) / parameters['beta']**2 * 1E9
-				print '\n dpp = ', dpp
+				#print '\n dpp = ', dpp
 				x[i] += dpp * dispersionx['etax0']
 				xp[i] += dpp * dispersionx['etapx0']	
 				y[i] += dpp * dispersiony['etay0']
