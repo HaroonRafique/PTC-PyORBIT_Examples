@@ -13,9 +13,9 @@ rf_voltage = 0.0123212966992E6
 
 # Simulation Parameters
 n_macroparticles = int(1E3)
-turns_max = int(1E1)	
-turns_update = range(-1, turns_max, 100)
-turns_print =  range(-1, turns_max, 100)
+turns_max = int(1)	
+turns_update = range(-1, turns_max, 1)
+turns_print =  range(-1, turns_max, 1)
 
 grid_x = 64
 grid_y = 64

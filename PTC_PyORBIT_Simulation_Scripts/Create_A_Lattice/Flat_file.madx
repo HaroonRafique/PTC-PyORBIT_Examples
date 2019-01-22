@@ -88,7 +88,7 @@ ptc_create_layout,time=true, model=2, exact=true, method=6, nst=3;
 ptc_script, file="./PS/resplit.ptc";
 ptc_script, file="./print_flat_file.ptc";
 select, flag=ptc_twiss, clear; 
-select, flag=ptc_twiss, column=name, betx, px, bety, py, disp3, disp3p, disp1, disp1p;
+select, flag=ptc_twiss, column=name, s, betx, bety, alfx, alfy, disp1, disp1p;
 ptc_twiss, icase=5, no=4, deltap_dependency, closed_orbit, file, table=ptc_twiss;
 ptc_end;
 

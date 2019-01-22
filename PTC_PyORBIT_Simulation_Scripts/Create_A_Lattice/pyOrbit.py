@@ -194,9 +194,24 @@ tunes.assignTwiss(*[Twiss_at_parentnode_entrance[k] for k in ['betax','alphax','
 tunes.assignClosedOrbit(*[Twiss_at_parentnode_entrance[k] for k in ['orbitx','orbitpx','orbity','orbitpy']])
 addTeapotDiagnosticsNodeAsChild(Lattice, parentnode, tunes)
 
-# Add Statistical Lattice Parameters Node
+# Add Statistical Lattice Parameters Nodes
+# This command will add one Teapot statlats node at start of each node 
+# in the lattice. In the output file we will have the columns:
+# (1) azimuthal position around ring, s [m]
+# (2) turn
+# (3) statistical horizontal beta_x [m]
+# (4) statistical vertical beta_y [m]
+# (5) statistical horizontal alpha_x [-]
+# (6) statistical vertical alpha_y [-]
+# (7) lattice horizontal beta_x [m]
+# (8) lattice vertical beta_y [m]
+# (9) lattice horizontal alpha_x [-]
+# (10) lattice vertical alpha_y [-]
+# The output file requires tracking to be performed. Note that these
+# parameters will be printed at every node for every turn. For this
+# example we therefore only track one turn.
 #-----------------------------------------------------------------------
-addTeapotStatLatsNodeSet(Lattice, "output/StatLats.txt")
+addTeapotStatLatsNodeSet(Lattice, "output/StatLats.dat")
 
 # Define twiss analysis and output dictionary
 #-----------------------------------------------------------------------
