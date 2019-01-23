@@ -24,7 +24,10 @@ class LongitudinalDistributionFromTomoscope():
 			self.data = data
 			self.I = data['density_array']
 			self.t, self.dE = np.meshgrid(data['time_nsec'],data['energy_MeV'])		
-				
+			# ~ print self.t
+			# ~ print self.dE.shape
+			# ~ print self.I.shape
+			
 		else:
 			thefile = open(filename,"r")
 			lines=0
@@ -38,6 +41,7 @@ class LongitudinalDistributionFromTomoscope():
 			thefile = open(filename,"r")			
 			
 			# Need to know the size of the square numpy array from the input file
+			# ~ self.I = np.zeros(shape=(lines,lines))
 			self.dt_bin =  np.zeros(shape=(lines,lines))
 			self.dE_bin =  np.zeros(shape=(lines,lines))
 			self.dt_no_bins = 0
@@ -108,6 +112,7 @@ class LongitudinalDistributionFromTomoscope():
 			U_.extend(u[mask])
 			V_.extend(v[mask])
 			W_.extend(w[mask])
+			# print len(U_)
 		t_rand = np.array(U_[:n_mp])
 		dE_rand = np.array(V_[:n_mp])
 		self.t_rand = t_rand
@@ -180,7 +185,9 @@ class LongitudinalJohoDistributionSingleHarmonic():
 		self.distribution = JohoNormalized2D(Joho_order)
 		
 	def is_inside_limiting_countour(self, phi, dE):
+		# ~ print '\n### Generate Initial Dsitribution 2: Entered LongitudinalJohoDistributionSingleHarmonic::is_inside_limiting_contour'
 		H = abs(self.harmonic_number * self.slip_factor / (2*self.beta**2 * self.energy) * dE**2 + self.rf_voltage/(2*pi)*(np.cos(phi) - np.cos(self.phi_s) + (phi-self.phi_s)*np.sin(self.phi_s))) 
+		# ~ H = abs(self.harmonic_number * self.slip_factor * dE**2 / 2  + self.rf_voltage/(2*pi * self.beta**2 * self.energy) * (np.cos(phi) - np.cos(self.phi_s) + (phi-self.phi_s)*np.sin(self.phi_s))) 
 		return H <= abs(self.H_max)
 
 	def getCoordinates(self):
@@ -193,6 +200,131 @@ class LongitudinalJohoDistributionSingleHarmonic():
 				# ~ print '\n### Generate Initial Dsitribution 2: Returned LongitudinalJohoDistributionSingleHarmonic::is_inside_limiting_contour'
 				break
 		return phi, dE
+							  
+def generate_initial_distribution_tomo_old(parameters, matfile=0, Lattice=None, output_file='ParticleDistribution.in', outputFormat='pyOrbit', summary_file='ParticleDistribution_summary.txt', summary_mat_file=None):
+	assert outputFormat in ['Orbit', 'pyOrbit']
+	p = parameters
+	beta = p['beta']
+	gamma = p['gamma']
+	if Lattice:
+		p['alphax0'] = Lattice.alphax0
+		p['betax0']  = Lattice.betax0
+		p['alphay0'] = Lattice.alphay0
+		p['betay0']  = Lattice.betay0
+		p['etax0']   = Lattice.etax0
+		p['etapx0']  = Lattice.etapx0
+		p['etay0']   = Lattice.etay0
+		p['etapy0']  = Lattice.etapy0
+		p['x0']      = Lattice.orbitx0
+		p['xp0']     = Lattice.orbitpx0
+		p['y0']      = Lattice.orbity0
+		p['yp0']     = Lattice.orbitpy0
+		p['gamma_transition'] = Lattice.gammaT
+		p['circumference']    = Lattice.getLength()
+
+	# building the distributions
+	# eta = 1/p['gamma_transition']**2 - 1/p['gamma']**2
+	# R = p['circumference']/2/np.pi
+	# beta = p['beta']
+	# energy = p['energy']
+	# phi_rf = p['phi_s']
+	# h = p['harmonic_number']
+	# h_main = np.atleast_1d(p['harmonic_number'])[0]
+	# rf_voltage = p['rf_voltage']
+	# RF = DoubleRF(R, eta, beta, energy, phi_rf, h, rf_voltage)
+	# Longitudinal_distribution = LongitudinalBinomialDistribution(RF, p['LongitudinalDistribution_z_max'], p['LongitudinalJohoParameter'])
+	# z, dpp = Longitudinal_distribution.getCoordinates(p['n_macroparticles'])
+	
+	# building the distributions
+	beta = p['beta']
+	try: 
+		noise_level = p['noise_level']
+	except KeyError:
+		noise_level = 0
+	
+	# ~ Longitudinal_distribution = LongitudinalDistributionFromTomoscope(p['tomo_file'])
+	Longitudinal_distribution = LongitudinalDistributionFromTomoscope(p['tomo_file'], matfile)
+	
+	# ~ Longitudinal_distribution.plot_Tomoscope_data()
+	# ~ Longitudinal_distribution.plot_generated_distribution()
+	
+	t_rand, dE_rand = Longitudinal_distribution.getCoordinates(p['n_macroparticles'], noise_level) 
+	z = t_rand * speed_of_light * beta * 1e-9 # convert ns to s and then m
+	# ~ z = (t_rand * 1e-9) * speed_of_light * beta * 0.075 # convert ns to s and then m
+	dE = dE_rand * 1e-3 # convert from MeV to GeV
+	dpp = dE / p['energy'] / 1.e-9 / beta**2 
+	# ~ dpp = dE / p['energy'] / beta**2  # Not sure which dpp definition is correct
+	
+	# h_main = np.atleast_1d(p['harmonic_number'])[0]
+	# R = p['circumference']/2/np.pi
+	# phi = - z * h_main / R
+
+	# z_arr, z_profile, z_rms, dp, dp_profile, dpp_rms = Longitudinal_distribution.getBunchProfile()
+	# p['dpp_sigma'] = _GaussianFit(dp, dp_profile)[0][2]
+	# p['dpp_sigma_from_FWHM'] = _Gaussian_sigma_from_FWHM(dp, dp_profile)
+	# p['dpp_profile'] = np.array([dp, dp_profile])
+	# p['dpp_rms'] = dpp_rms
+	# p['linedensity_profile'] = np.array([z_arr, z_profile])
+	# phi = - z * h_main / R
+	# dE = dpp * p['energy'] * beta**2 * 1.e-9
+
+	# transverse coordinates
+	x,xp,y,yp = [],[],[],[]
+	for epsn_x, epsn_y, intensity in zip(np.atleast_1d(p['epsn_x']), np.atleast_1d(p['epsn_y']), np.atleast_1d(p['intensity'])):
+		# twiss containers
+		twissX = TwissContainer(alpha = p['alphax0'], beta = p['betax0'], emittance = epsn_x / gamma / beta)
+		twissY = TwissContainer(alpha = p['alphay0'], beta = p['betay0'], emittance = epsn_y / gamma / beta)
+
+		Transverse_distribution = GaussDist2D(twissX, twissY, cut_off=p['TransverseCut'])
+		n_macroparticles_tmp = int(p['n_macroparticles']*(intensity/np.sum(p['intensity'])))
+		Transverse_coords = np.array(map(lambda i: Transverse_distribution.getCoordinates(), xrange(n_macroparticles_tmp)))
+		x.extend(Transverse_coords[:,0].tolist())
+		xp.extend(Transverse_coords[:,1].tolist())
+		y.extend(Transverse_coords[:,2].tolist())
+		yp.extend(Transverse_coords[:,3].tolist())
+		
+	# in case x has not yet a length of n_macroparticles
+	# ~ while len(x)<p['n_macroparticles']:
+		# ~ Transverse_coords = Transverse_distribution.getCoordinates()
+		# ~ x.append(Transverse_coords[0])
+		# ~ xp.append(Transverse_coords[1])
+		# ~ y.append(Transverse_coords[2])
+		# ~ yp.append(Transverse_coords[3])
+		
+	# Dispersion and closed orbit	
+	x = np.array(x) + p['x0']  + dpp * p['etax0']
+	xp = np.array(xp) + p['xp0'] + dpp * p['etapx0']
+	y = np.array(y) + p['y0']  + dpp * p['etay0']
+	yp = np.array(yp) + p['yp0'] + dpp * p['etapy0']
+
+	# only the main CPU is actually writing its distribution to a file ...
+	comm = orbit_mpi.mpi_comm.MPI_COMM_WORLD
+	if orbit_mpi.MPI_Comm_rank(comm) == 0:
+		with open(output_file,"w") as fid:
+			csv_writer = csv.writer(fid, delimiter=' ')
+			if outputFormat == 'Orbit':
+				x  *= 1000.
+				xp *= 1000.
+				y  *= 1000.
+				yp *= 1000.
+				# ~ dE[i] /= 1.e9	# Already in the correct units	
+				map(lambda i: csv_writer.writerow([x[i], xp[i], y[i], yp[i], phi[i], dE[i]]), range(p['n_macroparticles']))	
+			elif outputFormat == 'pyOrbit':
+				map(lambda i: csv_writer.writerow([x[i], xp[i], y[i], yp[i], z[i], dE[i]]), range(p['n_macroparticles']))	
+
+		if summary_file:
+			with open(summary_file, 'w') as fid:
+				map(lambda key: fid.write(key + ' = ' + str(p[key]) + '\n'), p)
+
+		if summary_mat_file:
+			with open(summary_mat_file, 'w') as fid:
+				sio.savemat(fid, parameters) 
+
+		print '\nCreated particle distribution with ' + str(p['n_macroparticles']) + ' macroparticles into file: ', output_file
+	
+	orbit_mpi.MPI_Barrier(comm)
+
+	return output_file
 
 def generate_initial_distribution_from_tomo(parameters, matfile=0, Lattice=None, output_file='ParticleDistribution.in', outputFormat='pyOrbit', summary_file='ParticleDistribution_summary.txt', summary_mat_file=None):
 	
@@ -256,26 +388,34 @@ def generate_initial_distribution_from_tomo(parameters, matfile=0, Lattice=None,
 			
 			csv_writer = csv.writer(fid, delimiter=' ')
 			for i in range(parameters['n_macroparticles']):
-
+				
+				# ~ (z[i], dE[i]) = Longitudinal_distribution.getCoordinates()
+				# ~ z[i] = z[i] * speed_of_light * parameters['beta'] * 1e-9 # convert ns to s and then m
+				# ~ dE[i] = dE[i] * 1e-3 # convert from MeV to GeV
 				(x[i], xp[i], y[i], yp[i]) = Transverse_distribution.getCoordinates()
 				x[i] += closedOrbitx['x0']
 				xp[i] += closedOrbitx['xp0']
 				y[i] += closedOrbity['y0']
 				yp[i] += closedOrbity['yp0']
 				dpp = dE[i] / (parameters['energy']) / parameters['beta']**2 * 1E9
-				print '\n dpp = ', dpp
+				#print '\n dpp = ', dpp
 				x[i] += dpp * dispersionx['etax0']
 				xp[i] += dpp * dispersionx['etapx0']	
 				y[i] += dpp * dispersiony['etay0']
 				yp[i] += dpp * dispersiony['etapy0']	
 				
+				# ~ if outputFormat == 'Orbit':
 				x[i] *= 1000.
 				xp[i] *= 1000.
 				y[i] *= 1000.
-				yp[i] *= 1000
-				
+				yp[i] *= 1000.
+				# ~ dE[i] /= 1.e9	
+						
+			# ~ if outputFormat == 'Orbit':
 			map(lambda i: csv_writer.writerow([x[i], xp[i], y[i], yp[i], phi[i], dE[i]]), range(parameters['n_macroparticles']))	
-
+			# ~ elif outputFormat == 'pyOrbit':
+				# ~ map(lambda i: csv_writer.writerow([x[i], xp[i], y[i], yp[i], z[i], dE[i]]), range(parameters['n_macroparticles']))	
+				
 		if summary_file:
 			with open(summary_file, 'w') as fid:
 				map(lambda key: fid.write(key + ' = ' + str(parameters[key]) + '\n'), parameters)
@@ -360,6 +500,44 @@ def generate_initial_distribution(parameters, Lattice,output_file = 'Input/Parti
 	orbit_mpi.MPI_Barrier(comm)
 
 	return output_file
+
+'''	if orbit_mpi.MPI_Comm_rank(orbit_mpi.mpi_comm.MPI_COMM_WORLD) == 0:
+		fid = open(output_file,"w")
+		csv_writer = csv.writer(fid, delimiter=' ')
+		for i in range(parameters['n_macroparticles']):
+			(phi[i], dE[i]) = Longitudinal_distribution.getCoordinates()
+			(x[i], xp[i], y[i], yp[i]) = Transverse_distribution.getCoordinates()
+			x[i] += closedOrbitx['x0']
+			xp[i] += closedOrbitx['xp0']
+			y[i] += closedOrbity['y0']
+			yp[i] += closedOrbity['yp0']
+			dpp = dE[i] / (parameters['energy']) / parameters['beta']**2
+			x[i] += dpp * dispersionx['etax0']
+			xp[i] += dpp * dispersionx['etapx0']	
+			y[i] += dpp * dispersiony['etay0']
+			yp[i] += dpp * dispersiony['etapy0']	
+		
+			if outputFormat == 'Orbit':
+				x[i] *= 1000.
+				xp[i] *= 1000.
+				y[i] *= 1000.
+				yp[i] *= 1000.
+				dE[i] /= 1.e9		
+				csv_writer.writerow([x[i], xp[i], y[i], yp[i], phi[i], dE[i]])
+		#	else:
+				# still need to convert from phi to z!!
+				#csv_writer.writerow([x[i], xp[i], y[i], yp[i], z[i], dE[i]])		
+		fid.close()
+
+		fid = open(summary_file, 'w')
+		parameter_list = ['circumference', 'rf_voltage', 'phi_s', 'harmonic_number', 'gamma_transition', 'n_macroparticles', 'energy', 'gamma', 'bunch_length', 'LongitudinalCut', 'LongitudinalJohoParameter', 'x0', 'xp0', 'betax0', 'alphax0', 'etax0', 'etapx0', 'y0', 'yp0', 'betay0', 'alphay0', 'etay0', 'etapy0', 'epsn_x', 'epsn_y', 'TransverseCut']
+		for key in parameter_list:
+			fid.write(key + ' = ' + str(parameters[key]) + '\n')
+		fid.close()
+
+		print '\nCreated particle distribution with ' + str(parameters['n_macroparticles']) + ' macroparticles into file: ', output_file
+	
+	return output_file'''
 
 def generate_initial_distribution_FMA(parameters, output_file = 'Input/ParticleDistribution.in', summary_file = 'Input/ParticleDistribution_summary.txt', outputFormat='Orbit', triangular_grid = True):
 
@@ -475,105 +653,5 @@ def generate_initial_distribution_y0(parameters, output_file = 'Input/ParticleDi
 		fid.close()
 
 		print '\nCreated particle distribution with ' + str(len(x)) + ' macroparticles into file: ', output_file
-	
-	return output_file
-
-
-def generate_initial_distribution_3DGaussian(parameters, Lattice, output_file = 'Input/ParticleDistribution.in', summary_file = 'Input/ParticleDistribution_summary.txt', outputFormat='Orbit'):
-	
-	parameters['alphax0'] = Lattice.alphax0
-	parameters['betax0']  = Lattice.betax0
-	parameters['alphay0'] = Lattice.alphay0
-	parameters['betay0']  = Lattice.betay0
-	parameters['etax0']   = Lattice.etax0
-	parameters['etapx0']  = Lattice.etapx0
-	parameters['etay0']   = Lattice.etay0
-	parameters['etapy0']  = Lattice.etapy0
-	parameters['x0']      = Lattice.orbitx0
-	parameters['xp0']     = Lattice.orbitpx0
-	parameters['y0']      = Lattice.orbity0
-	parameters['yp0']     = Lattice.orbitpy0
-	parameters['gamma_transition'] = Lattice.gammaT
-	parameters['circumference']    = Lattice.getLength()
-	parameters['length'] = Lattice.getLength()/Lattice.nHarm
-	
-	# twiss containers
-	twissX = TwissContainer(alpha = parameters['alphax0'], beta = parameters['betax0'], emittance = parameters['epsn_x'] / parameters['gamma'] / parameters['beta'])
-	twissY = TwissContainer(alpha = parameters['alphay0'], beta = parameters['betay0'], emittance = parameters['epsn_y'] / parameters['gamma'] / parameters['beta'])
-	dispersionx = {'etax0': parameters['etax0'], 'etapx0': parameters['etapx0']}
-	dispersiony = {'etay0': parameters['etay0'], 'etapy0': parameters['etapy0']}
-	closedOrbitx = {'x0': parameters['x0'], 'xp0': parameters['xp0']} 
-	closedOrbity = {'y0': parameters['y0'], 'yp0': parameters['yp0']} 
-
-	# initialize particle arrays
-	x = np.zeros(parameters['n_macroparticles'])
-	xp = np.zeros(parameters['n_macroparticles'])
-	y = np.zeros(parameters['n_macroparticles'])
-	yp = np.zeros(parameters['n_macroparticles'])
-	phi = np.zeros(parameters['n_macroparticles'])
-	# ~ z = np.zeros(parameters['n_macroparticles'])
-	dE = np.zeros(parameters['n_macroparticles'])
-
-	# building the distributions
-	Transverse_distribution = GaussDist2D(twissX, twissY, cut_off=parameters['TransverseCut'])
-	# ~ Longitudinal_distribution = LongitudinalJohoDistributionSingleHarmonic(parameters, parameters['LongitudinalJohoParameter'])
-	
-	# We need to convert z into phi
-	h_main = np.atleast_1d(parameters['harmonic_number'])[0]
-	R = parameters['circumference'] / 2 / np.pi
-	sig_E = (parameters['dpp_rms'] * parameters['energy'] * parameters['beta']**2)
-
-	if orbit_mpi.MPI_Comm_rank(orbit_mpi.mpi_comm.MPI_COMM_WORLD) == 0:
-		fid = open(output_file,"w")
-		csv_writer = csv.writer(fid, delimiter=' ')
-		for i in range(parameters['n_macroparticles']):
-			
-			# Longitudinal distn - use 5 sigma as cut-off (manual)
-			
-			outside_limits_E = True
-			while outside_limits_E:
-				dE[i] = random.gauss(0., sig_E)	# Energy in eV
-				if abs(dE[i]) < (5*sig_E):
-					print '\n\tdE = ', dE[i]
-					outside_limits_E = False
-			
-			outside_limits_z = True			
-			while outside_limits_z:
-				z_temp = random.gauss(0., parameters['blength_rms'])
-				if abs(z_temp) < (5*parameters['blength_rms']):			
-					print '\n\tz_temp = ', z_temp		
-					phi[i] = - z_temp * h_main / R 
-					outside_limits_z = False
-							
-			(x[i], xp[i], y[i], yp[i]) = Transverse_distribution.getCoordinates()
-			x[i] += closedOrbitx['x0']
-			xp[i] += closedOrbitx['xp0']
-			y[i] += closedOrbity['y0']
-			yp[i] += closedOrbity['yp0']
-			dpp = dE[i] / (parameters['energy']) / parameters['beta']**2
-			x[i] += dpp * dispersionx['etax0']
-			xp[i] += dpp * dispersionx['etapx0']	
-			y[i] += dpp * dispersiony['etay0']
-			yp[i] += dpp * dispersiony['etapy0']	
-		
-			if outputFormat == 'Orbit':
-				x[i] *= 1000.
-				xp[i] *= 1000.
-				y[i] *= 1000.
-				yp[i] *= 1000
-				dE[i] /= 1.e9		
-				csv_writer.writerow([x[i], xp[i], y[i], yp[i], phi[i], dE[i]])
-		#	else:
-				# still need to convert from phi to z!!
-				#csv_writer.writerow([x[i], xp[i], y[i], yp[i], z[i], dE[i]])		
-		fid.close()
-
-		fid = open(summary_file, 'w')
-		parameter_list = ['circumference', 'rf_voltage', 'phi_s', 'harmonic_number', 'gamma_transition', 'n_macroparticles', 'energy', 'gamma', 'bunch_length', 'LongitudinalCut', 'LongitudinalJohoParameter', 'x0', 'xp0', 'betax0', 'alphax0', 'etax0', 'etapx0', 'y0', 'yp0', 'betay0', 'alphay0', 'etay0', 'etapy0', 'epsn_x', 'epsn_y', 'TransverseCut']
-		for key in parameter_list:
-			fid.write(key + ' = ' + str(parameters[key]) + '\n')
-		fid.close()
-
-		print '\nCreated particle distribution with ' + str(parameters['n_macroparticles']) + ' macroparticles into file: ', output_file
 	
 	return output_file

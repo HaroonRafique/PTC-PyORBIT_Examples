@@ -166,6 +166,15 @@ if sts['turn'] < 0:
 	saveBunchAsMatfile(bunch, "bunch_output/mainbunch_-000001")
 	saveBunchAsMatfile(bunch, "input/mainbunch")
 	sts['mainbunch_file'] = "input/mainbunch"
+	
+# Create empty lost bunch
+#-----------------------------------------------------------------------
+	lostbunch = Bunch()
+	bunch.copyEmptyBunchTo(lostbunch)
+	lostbunch.addPartAttr('ParticlePhaseAttributes')
+	lostbunch.addPartAttr("LostParticleAttributes")	
+	saveBunchAsMatfile(lostbunch, "input/lostbunch")
+	sts['lostbunch_file'] = "input/lostbunch"
 
 # Add items to pickle parameters
 #-----------------------------------------------------------------------
@@ -173,10 +182,10 @@ if sts['turn'] < 0:
 	sts['turns_update'] = p['turns_update']
 	sts['turns_print'] = p['turns_print']
 	sts['circumference'] = p['circumference']
-	if frozen:
-		sts['sc_params1'] = {'intensity': p['intensity'], 'epsn_x': p['epsn_x'], 'epsn_y': p['epsn_y'], 'dpp_rms': p['dpp_rms']}
 
 bunch = bunch_from_matfile(sts['mainbunch_file'])
+lostbunch = bunch_from_matfile(sts['lostbunch_file'])
+paramsDict["lostbunch"] = lostbunch
 paramsDict["bunch"] = bunch
 
 # Add tune analysis child node
