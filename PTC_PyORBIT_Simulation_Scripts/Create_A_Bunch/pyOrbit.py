@@ -45,11 +45,11 @@ from lib.save_bunch_as_matfile import *
 #-----------------------------------------------------------------------
 comm = orbit_mpi.mpi_comm.MPI_COMM_WORLD
 rank = orbit_mpi.MPI_Comm_rank(comm)
-print 'Start on MPI process: ', rank
+print '\nPyORBIT: Start on MPI process: ', rank
 
 # Create folder structure
 #-----------------------------------------------------------------------
-print '\nmkdir on MPI process: ', rank
+print '\nPyORBIT: mkdir on MPI process: ', rank
 from lib.mpi_helpers import mpi_mkdir_p
 mpi_mkdir_p('input')
 mpi_mkdir_p('bunch_output')
@@ -67,21 +67,21 @@ else:
 
 # Generate Lattice (MADX + PTC) - Use MPI to run on only one 'process'
 #-----------------------------------------------------------------------
-print '\nStart MADX on MPI process: ', rank
+print '\nPyORBIT: Start MADX on MPI process: ', rank
 if not rank:
 	os.system("/afs/cern.ch/eng/sl/MAD-X/pro/releases/5.02.00/madx-linux64 < Flat_file.madx")
 orbit_mpi.MPI_Barrier(comm)
 
 # Generate PTC RF table
 #-----------------------------------------------------------------------
-print '\nstart RF file on MPI process: ', rank
+print '\nPyORBIT: start RF file on MPI process: ', rank
 from lib.write_ptc_table import write_RFtable
 from simulation_parameters import RFparameters as RF 
 write_RFtable('input/RF_table.ptc', *[RF[k] for k in ['harmonic_factors','time','Ekin_GeV','voltage_MV','phase']])
 
 # Initialize a Teapot-Style PTC lattice
 #-----------------------------------------------------------------------
-print '\nstart PTC Flat file on MPI process: ', rank
+print '\nPyORBIT: start PTC Flat file on MPI process: ', rank
 PTC_File = 'PTC-PyORBIT_flat_file.flt'
 Lattice = PTC_Lattice("PS")
 Lattice.readPTC(PTC_File)
@@ -92,13 +92,13 @@ readScriptPTC('Input/ramp_cavities.ptc')
 
 # Create a dictionary of parameters
 #-----------------------------------------------------------------------
-print '\nparamsDict on MPI process: ', rank
+print '\nPyORBIT: paramsDict on MPI process: ', rank
 paramsDict = {}
 paramsDict["length"] = Lattice.getLength()/Lattice.nHarm
 
 # Add apertures
 #-----------------------------------------------------------------------
-print '\nAdd apertures on MPI process: ', rank
+print '\nPyORBIT: Add apertures on MPI process: ', rank
 position = 0
 for node in Lattice.getNodes():
 	# This creates an aperture node. Shape: 1 = circle, 2 = ellipse,
@@ -117,7 +117,7 @@ for node in Lattice.getNodes():
 # Make a bunch and import relevant parameters for it
 #-----------------------------------------------------------------------
 if sts['turn'] < 0:
-	print '\nBunches on MPI process: ', rank
+	print '\nPyORBIT: Bunches on MPI process: ', rank
 	bunch = Bunch()
 	setBunchParamsPTC(bunch)
 
@@ -130,28 +130,34 @@ if sts['turn'] < 0:
 	p['bunch_length'] = p['blength_rms']/speed_of_light/bunch.getSyncParticle().beta()*4
 	kin_Energy = bunch.getSyncParticle().kinEnergy()
 
-	print '\nbunch_orbit_to_pyorbit on MPI process: ', rank
+	print '\nPyORBIT: bunch_orbit_to_pyorbit on MPI process: ', rank
 	for i in p: print '\t', i, '\t = \t', p[i]
 
 # Create the initial distribution 
 # Here we have a choice. The current supported options are:
-# Matched distribution using lattice parameters etc
-# Matched distribution with longitudinal part from tomoscope measurement
-# 3D Gaussian using lattice parameters
-# Poincare distribution (used for verifying particle motion etc)
-
+# -Matched distribution using lattice parameters etc
+# -Matched distribution with longitudinal part from tomoscope measurement
+# -3D Gaussian using lattice parameters
+# -Poincare distribution (used for verifying particle motion etc)
+# To choose which distribution to use, please change the int distn_type 
+# value in ./simulation_parameters.py to one of the following options:
 #-----------------------------------------------------------------------
-	print '\ngenerate_initial_distribution on MPI process: ', rank
-	if s['ImportFromTomo']:
-		if '.mat' in p['tomo_file']:
-			Particle_distribution = generate_initial_distribution_from_tomo(p, 1, Lattice, output_file='input/ParticleDistribution.in', summary_file='input/ParticleDistribution_summary.txt')
-		else:
-			Particle_distribution = generate_initial_distribution_from_tomo(p, 0, Lattice, output_file='input/ParticleDistribution.in', summary_file='input/ParticleDistribution_summary.txt')
-	else:
-		Particle_distribution_file = generate_initial_distribution_3DGaussian(p, Lattice, output_file='input/ParticleDistribution.in', summary_file='input/ParticleDistribution_summary.txt')
+	print '\nPyORBIT: generate_initial_distribution on MPI process: ', rank
+	
+	if s['distn_type'] == 0:
+		print '\nPyORBIT: Generate initial distribution: 3D Gaussian chosen'
+		Particle_distribution = generate_initial_distribution_3DGaussian(p, Lattice, output_file='input/ParticleDistribution.in', summary_file='input/ParticleDistribution_summary.txt')
+	elif s['distn_type'] == 1:
+		print '\nPyORBIT: Generate initial distribution: Distribution from Tomo chosen'
+		Particle_distribution = generate_initial_distribution_from_tomo(p, 1, Lattice, output_file='input/ParticleDistribution.in', summary_file='input/ParticleDistribution_summary.txt')
+	elif s['distn_type'] == 2:
+		print '\nPyORBIT: Generate initial distribution: Matched chosen'
 		Particle_distribution = generate_initial_distribution(p, Lattice, output_file='input/ParticleDistribution.in', summary_file='input/ParticleDistribution_summary.txt')
+	else:
+		print '\nPyORBIT: ERROR: Generate initial distribution: \'dist_type\' integer in \'simulation_parameters.py\' set to invalid value. Exiting'
+		print (exit)	
 
-	print '\bunch_orbit_to_pyorbit on MPI process: ', rank
+	print '\nPyORBIT: \bunch_orbit_to_pyorbit on MPI process: ', rank
 	bunch_orbit_to_pyorbit(paramsDict["length"], kin_Energy, Particle_distribution, bunch, p['n_macroparticles'] + 1) #read in only first N_mp particles.
 	
 # Add Macrosize to bunch
@@ -163,7 +169,9 @@ if sts['turn'] < 0:
 # Dump and save as Matfile
 #-----------------------------------------------------------------------
 	bunch.dumpBunch("input/mainbunch_start.dat")
+	print '\nPyORBIT: Initial bunch dumped to .dat file input/mainbunch_start.dat'
 	saveBunchAsMatfile(bunch, "bunch_output/mainbunch_-000001")
+	print '\nPyORBIT: Initial bunch dumped to .mat file bunch_output/mainbunch_-000001'
 	saveBunchAsMatfile(bunch, "input/mainbunch")
 	sts['mainbunch_file'] = "input/mainbunch"
 	
@@ -201,7 +209,7 @@ addTeapotDiagnosticsNodeAsChild(Lattice, parentnode, tunes)
 
 # Define twiss analysis and output dictionary
 #-----------------------------------------------------------------------
-print '\nTWISS on MPI process: ', rank
+print '\nPyORBIT: TWISS on MPI process: ', rank
 bunchtwissanalysis = BunchTwissAnalysis() #Prepare the analysis class that will look at emittances, etc.
 get_dpp = lambda b, bta: np.sqrt(bta.getCorrelation(5,5)) / (b.getSyncParticle().gamma()*b.mass()*b.getSyncParticle().beta()**2)
 get_bunch_length = lambda b, bta: 4 * np.sqrt(bta.getCorrelation(4,4)) / (speed_of_light*b.getSyncParticle().beta())
@@ -230,7 +238,7 @@ if os.path.exists(output_file):
 
 # Track
 #-----------------------------------------------------------------------
-print '\nTracking on MPI process: ', rank
+print '\nPyORBIT: Tracking on MPI process: ', rank
 start_time = time.time()
 last_time = time.time()
 

@@ -2,6 +2,12 @@ import numpy as np
 
 tomo_file = 'Input/PyORBIT_Tomo_file.mat'
 
+# Choose bunch distribution type
+# 0 = 3D Gaussian
+# 1 = From Tomo
+# 2 = Matched
+distn_type = 0
+
 # Beam Parameters
 intensity = 2e+12
 epsn_x = 2.036e-6
@@ -12,12 +18,10 @@ dpp_rms = 9.81e-04
 rf_voltage = 0.0123212966992E6
 
 # Simulation Parameters
-# Noise test
 n_macroparticles = int(1E4)
 turns_max = int(1E2)	
-#turns_max = int(1E4)	
-turns_update = range(-1, turns_max, 10)
-turns_print =  range(-1, turns_max, 10)
+turns_update = range(-1, turns_max, 5)
+turns_print =  range(-1, turns_max, 5)
 
 grid_x = 64
 grid_y = 64
@@ -38,6 +42,7 @@ circumference = 2*np.pi*100
 m = 1.2
 TransverseCut = 5
 
+
 parameters = {
 	'tomo_file': tomo_file,
 	'LongitudinalJohoParameter': m,
@@ -54,7 +59,8 @@ parameters = {
 	'turns_update': turns_update,
 	'turns_print': turns_print,
 	'rf_voltage': rf_voltage,
-	'circumference':circumference
+	'circumference':circumference,
+	'distn_type': dist_type
 }
 
 switches = {

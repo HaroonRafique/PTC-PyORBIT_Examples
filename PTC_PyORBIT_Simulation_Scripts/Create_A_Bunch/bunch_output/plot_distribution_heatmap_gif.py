@@ -29,9 +29,9 @@ import imageio
 # Figure settings #
 ###################
 
-plt.rcParams['figure.figsize'] = [8.0, 6.0]
-plt.rcParams['figure.dpi'] = 600
-plt.rcParams['savefig.dpi'] = 600
+plt.rcParams['figure.figsize'] = [4.0, 3.0]
+plt.rcParams['figure.dpi'] = 300
+plt.rcParams['savefig.dpi'] = 300
 
 plt.rcParams['font.size'] = 6
 plt.rcParams['legend.fontsize'] = 'large'
@@ -129,6 +129,7 @@ print '\nThe last turn recorded is turn ', max_file_no+1, ' in file ', max_file
 
 print '\nz_max = ', z_max, ', z_min = ', z_min
 print '\ndE_max = ', dE_max, ', dE_min = ', dE_min
+print '\n'
 
 z_max = 50.
 z_min = -50.
@@ -374,7 +375,7 @@ for t in sorted(iterators):
 # Make GIFs #
 #############
 
-print 'Creating x-y x-xp y-yp z-dE (no histogram) GIF'
+print '\nCreating x-y x-xp y-yp z-dE (no histogram) GIF'
 images = []
 for filename in filenames_all:
     images.append(imageio.imread(filename))
@@ -404,4 +405,4 @@ for filename in filenames_y_yp:
     images.append(imageio.imread(filename))
 imageio.mimsave('Gif_y_yp/y_yp.gif', images)	
 
-print 'All Done! Peace out'
+print '\nAll Done! Peace out'
