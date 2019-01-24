@@ -60,7 +60,7 @@ parameters = {
 	'turns_print': turns_print,
 	'rf_voltage': rf_voltage,
 	'circumference':circumference,
-	'distn_type': dist_type
+	'distn_type': distn_type
 }
 
 switches = {

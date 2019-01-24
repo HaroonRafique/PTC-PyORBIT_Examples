@@ -144,13 +144,13 @@ if sts['turn'] < 0:
 #-----------------------------------------------------------------------
 	print '\nPyORBIT: generate_initial_distribution on MPI process: ', rank
 	
-	if s['distn_type'] == 0:
+	if p['distn_type'] == 0:
 		print '\nPyORBIT: Generate initial distribution: 3D Gaussian chosen'
 		Particle_distribution = generate_initial_distribution_3DGaussian(p, Lattice, output_file='input/ParticleDistribution.in', summary_file='input/ParticleDistribution_summary.txt')
-	elif s['distn_type'] == 1:
+	elif p['distn_type'] == 1:
 		print '\nPyORBIT: Generate initial distribution: Distribution from Tomo chosen'
 		Particle_distribution = generate_initial_distribution_from_tomo(p, 1, Lattice, output_file='input/ParticleDistribution.in', summary_file='input/ParticleDistribution_summary.txt')
-	elif s['distn_type'] == 2:
+	elif p['distn_type'] == 2:
 		print '\nPyORBIT: Generate initial distribution: Matched chosen'
 		Particle_distribution = generate_initial_distribution(p, Lattice, output_file='input/ParticleDistribution.in', summary_file='input/ParticleDistribution_summary.txt')
 	else:

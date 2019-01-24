@@ -4,3 +4,4 @@
 rm junk.txt
 rm Maxwellian_bend_for_ptc.txt
 rm simulation_parameters.pyc
+rm input/simulation_status.pkl
