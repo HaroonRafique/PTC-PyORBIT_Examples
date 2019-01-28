@@ -6,7 +6,7 @@ tomo_file = 'Input/PyORBIT_Tomo_file.mat'
 # 0 = 3D Gaussian
 # 1 = From Tomo
 # 2 = Matched
-distn_type = 0
+distn_type = 2
 
 # Beam Parameters
 intensity = 2e+12

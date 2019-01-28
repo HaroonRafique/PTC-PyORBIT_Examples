@@ -267,3 +267,5 @@ for turn in range(sts['turn']+1, sts['turns_max']):
 		if not rank:
 			with open(status_file, 'w') as fid:
 				pickle.dump(sts, fid)
+
+print '\nPyORBIT: Create_A_Bunch simulation complete.'

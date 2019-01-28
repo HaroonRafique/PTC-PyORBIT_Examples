@@ -1,6 +1,7 @@
 #!/bin/bash
 # Clean folder for this specific PTC-PyORBIT Example:
 # Flat_file_from_madx
+rm - bunch_output
 rm -r input
 rm -r lost
 rm -r output
