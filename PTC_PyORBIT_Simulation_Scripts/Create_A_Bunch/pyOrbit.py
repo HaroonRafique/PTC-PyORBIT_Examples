@@ -1,5 +1,5 @@
-# This example shows us how to create a lattice in PyORBIT using the
-# provided MAD-X and PTC scripts
+# This example shows us how to create a bunch in PyORBIT using user 
+# defined library classes and functions
 
 import math
 import sys
