@@ -264,8 +264,8 @@ for turn in range(sts['turn']+1, sts['turns_max']):
 	
 	# ~ readScriptPTC("ptc/update-twiss.ptc") # this is needed to correclty update the twiss functions in all lattice nodes in updateParamsPTC
 	# ~ updateParamsPTC(Lattice,bunch) # to update bunch energy and twiss functions
-	tunes.assignTwiss(*[Twiss_at_parentnode_entrance()[k] for k in ['betax','alphax','etax','etapx','betay','alphay','etay','etapy']])
-	tunes.assignClosedOrbit(*[Twiss_at_parentnode_entrance()[k] for k in ['orbitx','orbitpx','orbity','orbitpy']])
+	# ~ tunes.assignTwiss(*[Twiss_at_parentnode_entrance()[k] for k in ['betax','alphax','etax','etapx','betay','alphay','etay','etapy']])
+	# ~ tunes.assignClosedOrbit(*[Twiss_at_parentnode_entrance()[k] for k in ['orbitx','orbitpx','orbity','orbitpy']])
 	# ~ CO_x.append([n.getParamsDict()['orbitx'] for n in Lattice.getNodes()])
 	# ~ BETA_y.append([n.getParamsDict()['betay'] for n in Lattice.getNodes()])
 	

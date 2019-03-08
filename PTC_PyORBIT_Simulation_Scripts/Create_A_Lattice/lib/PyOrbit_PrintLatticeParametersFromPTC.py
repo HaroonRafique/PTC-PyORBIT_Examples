@@ -35,7 +35,37 @@ def PrintLatticeParameters(Lattice, turn):
 	orbit_py.append([n.getParamsDict()['orbitpy'] for n in Lattice.getNodes()])
 	
 	s = np.cumsum([n.getLength() for n in Lattice.getNodes()])
+	savename = str('PTC_Lattice_Parameters_turn_' + str(turn) + '.dat')
 	
-	np.savetxt('PTC_Lattice_Parameters.dat', (beta_x, beta_y, alpha_x, alpha_y, eta_x, eta_y, eta_px, eta_py, orbit_x, orbit_y, orbit_px, orbit_py))
+	f = open(savename,"w+")
+	f.write('# s\tbeta_x\tbeta_y\talpha_x\talpha_y\teta_x\teta_y\teta_px\teta_py\torbit_x\torbit_px\torbit_y\torbit_py')
+	
+	for i in range(len(s)):
+		f.write('\n')
+		f.write(str(s[i]))
+		f.write('\t')
+		f.write(str(beta_x[i]))
+		f.write('\t')
+		f.write(str(beta_y[i]))
+		f.write('\t')
+		f.write(str(alpha_x[i]))
+		f.write('\t')
+		f.write(str(alpha_y[i]))
+		f.write('\t')
+		f.write(str(eta_x[i]))
+		f.write('\t')
+		f.write(str(eta_y[i]))
+		f.write('\t')
+		f.write(str(eta_px[i]))
+		f.write('\t')
+		f.write(str(eta_py[i]))
+		f.write('\t')
+		f.write(str(orbit_x[i]))
+		f.write('\t')
+		f.write(str(orbit_px[i]))
+		f.write('\t')
+		f.write(str(orbit_y[i]))
+		f.write('\t')
+		f.write(str(orbit_py[i]))
 	
 	return
