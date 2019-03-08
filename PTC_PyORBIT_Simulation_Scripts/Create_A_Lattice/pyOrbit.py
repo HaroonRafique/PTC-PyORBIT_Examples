@@ -37,6 +37,7 @@ from ext.ptc_orbit.ptc_orbit import updateParamsPTC, synchronousSetPTC, synchron
 from ext.ptc_orbit.ptc_orbit import trackBunchThroughLatticePTC, trackBunchInRangePTC
 from orbit.aperture import TeapotApertureNode
 
+from lib.PyOrbit_PrintLatticeParametersFromPTC import *
 from lib.output_dictionary import *
 from lib.pyOrbit_GenerateInitialDistribution2 import *
 from lib.save_bunch_as_matfile import *
@@ -260,6 +261,14 @@ for turn in range(sts['turn']+1, sts['turns_max']):
 		
 	Lattice.trackBunch(bunch, paramsDict)
 	bunchtwissanalysis.analyzeBunch(bunch)  # analyze twiss and emittance	
+	
+	# ~ readScriptPTC("ptc/update-twiss.ptc") # this is needed to correclty update the twiss functions in all lattice nodes in updateParamsPTC
+	# ~ updateParamsPTC(Lattice,bunch) # to update bunch energy and twiss functions
+	tunes.assignTwiss(*[Twiss_at_parentnode_entrance()[k] for k in ['betax','alphax','etax','etapx','betay','alphay','etay','etapy']])
+	tunes.assignClosedOrbit(*[Twiss_at_parentnode_entrance()[k] for k in ['orbitx','orbitpx','orbity','orbitpy']])
+	# ~ CO_x.append([n.getParamsDict()['orbitx'] for n in Lattice.getNodes()])
+	# ~ BETA_y.append([n.getParamsDict()['betay'] for n in Lattice.getNodes()])
+	
 				
 	if turn in sts['turns_update']:
 		sts['turn'] = turn
@@ -270,7 +279,8 @@ for turn in range(sts['turn']+1, sts['turns_max']):
 		saveBunchAsMatfile(bunch, "input/mainbunch")
 		saveBunchAsMatfile(bunch, "bunch_output/mainbunch_%s"%(str(turn).zfill(6)))
 		saveBunchAsMatfile(lostbunch, "lost/lostbunch_%s"%(str(turn).zfill(6)))
-		output.save_to_matfile(output_file)		        
+		output.save_to_matfile(output_file)		
+		PrintLatticeParameters(Lattice, turn)        
 		if not rank:
 			with open(status_file, 'w') as fid:
 				pickle.dump(sts, fid)
