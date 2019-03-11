@@ -105,9 +105,9 @@ fig, ax1 = plt.subplots();
 
 plt.title("PTC vs PyORBIT Beta x");
 
-ax1.plot(s_po, betx_po, 'b', label=r'PyORBIT $\beta_x$', linewidth=3);
-ax1.plot(s, betx, 'k', label=r'PTC $\beta_x$', linewidth=2);
-ax1.plot(s_po_ptc, betx_po_ptc, 'r', label=r'PTC from PyORBIT $\beta_x$', linewidth=1);
+ax1.plot(s, betx, 'k', label=r'PTC $\beta_x$', linewidth=1);
+ax1.scatter(s_po, betx_po, color='b', marker ='d', label=r'PyORBIT $\beta_x$');
+ax1.scatter(s_po_ptc, betx_po_ptc, color='r', marker ='d',  label=r'PTC from PyORBIT $\beta_x$');
 
 ax1.set_xlabel("s [m]");
 ax1.set_ylabel(r"$\beta_x$ [m]", color='b');
@@ -135,9 +135,9 @@ fig, ax1 = plt.subplots();
 
 plt.title("PTC vs PyORBIT Beta x");
 
-ax1.plot(s_po, betx_po, 'b', label=r'PyORBIT $\beta_x$', linewidth=3);
-ax1.plot(s, betx, 'k', label=r'PTC $\beta_x$', linewidth=2);
-ax1.plot(s_po_ptc, betx_po_ptc, 'r', label=r'PTC from PyORBIT $\beta_x$', linewidth=1);
+ax1.plot(s, betx, 'k', label=r'PTC $\beta_x$', linewidth=1);
+ax1.scatter(s_po, betx_po, color='b', marker='d', label=r'PyORBIT $\beta_x$', linewidth=1);
+ax1.scatter(s_po_ptc, betx_po_ptc, color='r', marker='d', label=r'PTC from PyORBIT $\beta_x$', linewidth=1);
 
 ax1.set_xlabel("s [m]");
 ax1.set_ylabel(r"$\beta_x$ [m]", color='b');
@@ -164,9 +164,9 @@ fig, ax1 = plt.subplots();
 
 plt.title("PTC vs PyORBIT Beta y");
 
-ax1.plot(s_po, bety_po, 'b', label=r'PyORBIT $\beta_y$', linewidth=3);
-ax1.plot(s, bety, 'k', label=r'PTC $\beta_y$', linewidth=2);
-ax1.plot(s_po_ptc, bety_po_ptc, 'r', label=r'PTC from PyORBIT $\beta_y$', linewidth=1);
+ax1.plot(s, bety, 'k', label=r'PTC $\beta_y$', linewidth=1);
+ax1.scatter(s_po, bety_po, color='b', marker='d', label=r'PyORBIT $\beta_y$', linewidth=1);
+ax1.scatter(s_po_ptc, bety_po_ptc, color='r', marker='d', label=r'PTC from PyORBIT $\beta_y$', linewidth=1);
 
 ax1.set_xlabel("s [m]");
 ax1.set_ylabel(r"$\beta_y$ [m]", color='b');
@@ -194,9 +194,9 @@ fig, ax1 = plt.subplots();
 
 plt.title(r"PTC vs PyORBIT $\alpha_x$");
 
-ax1.plot(s_po, alfx_po, 'r', label=r'PyORBIT $\alpha_x$', linewidth=3);
-ax1.plot(s, alfx, 'k', label=r'PTC $\alpha_x$', linewidth=2);
-ax1.plot(s_po_ptc, alfx_po_ptc, 'r', label=r'PTC from PyORBIT $\alpha_x$', linewidth=1);
+ax1.plot(s, alfx, 'k', label=r'PTC $\alpha_x$', linewidth=1);
+ax1.scatter(s_po, alfx_po, color='b', marker='d', label=r'PyORBIT $\alpha_x$', linewidth=1);
+ax1.scatter(s_po_ptc, alfx_po_ptc, color='r', marker='d', label=r'PTC from PyORBIT $\alpha_x$', linewidth=1);
 
 ax1.set_xlabel("s [m]");
 ax1.set_ylabel(r"$\alpha_x$ [-]", color='b');
@@ -221,9 +221,9 @@ fig, ax1 = plt.subplots();
 
 plt.title(r"PTC vs PyORBIT $\alpha_y$");
 
-ax1.plot(s_po, alfy_po, 'r', label=r'PyORBIT $\alpha_y$', linewidth=3);
-ax1.plot(s, alfy, 'k', label=r'PTC $\alpha_y$', linewidth=2);
-ax1.plot(s_po_ptc, alfy_po_ptc, 'r', label=r'PTC from PyORBIT $\alpha_y$', linewidth=1);
+ax1.plot(s, alfy, 'k', label=r'PTC $\alpha_y$', linewidth=1);
+ax1.scatter(s_po, alfy_po, color='b', marker='d', label=r'PyORBIT $\alpha_y$', linewidth=1);
+ax1.scatter(s_po_ptc, alfy_po_ptc, color='r', marker='d', label=r'PTC from PyORBIT $\alpha_y$', linewidth=1);
 
 ax1.set_xlabel("s [m]");
 ax1.set_ylabel(r"$\alpha_y$ [-]", color='b');
@@ -248,9 +248,9 @@ print 'Plotting D_x'
 fig, ax1 = plt.subplots();
 
 plt.title("PTC Dispersion Functions");
-ax1.plot(s_po, dx_po, 'b', label=r'PyORBIT $D_x$', linewidth=1);
 ax1.plot(s, dx, 'k', label=r'PTC $D_x$', linewidth=1);
-ax1.plot(s_po_ptc, dx_po_ptc, 'r', label=r'PTC from PyORBIT $D_x$', linewidth=1);
+ax1.scatter(s_po, dx_po, color='b', marker='d', label=r'PyORBIT $D_x$', linewidth=1);
+ax1.scatter(s_po_ptc, dx_po_ptc, color='r', marker='d', label=r'PTC from PyORBIT $D_x$', linewidth=1);
 
 ax1.set_xlabel("s [m]");
 ax1.set_ylabel(r"$D_x$ [m]", color='b');

@@ -5,7 +5,7 @@
 from ext.ptc_orbit import PTC_Lattice
 import numpy as np
 
-def PrintLatticeParameters(Lattice, turn, lattice_folder='.'):
+def PrintLatticeFunctions(Lattice, turn=None, lattice_folder='.'):
 		
 	# Empty arrays
 	beta_x = []
@@ -35,10 +35,14 @@ def PrintLatticeParameters(Lattice, turn, lattice_folder='.'):
 	orbit_py.append([n.getParamsDict()['orbitpy'] for n in Lattice.getNodes()])
 	
 	s = np.cumsum([n.getLength() for n in Lattice.getNodes()])
-	savename = str(lattice_folder + '/PTC_Lattice_Parameters_turn_' + str(turn) + '.dat')
+	
+	if turn is None:
+		savename = str(lattice_folder + '/PTC_Lattice_Parameter.dat')
+	else:
+		savename = str(lattice_folder + '/PTC_Lattice_Parameters_turn_' + str(turn) + '.dat')
 	
 	f = open(savename,"w+")
-	f.write('# s\tbeta_x\tbeta_y\talpha_x\talpha_y\teta_x\teta_y\teta_px\teta_py\torbit_x\torbit_px\torbit_y\torbit_py')
+	f.write('# s\tbeta_x\tbeta_y\talpha_x\talpha_y\tD_x\tD_y\tD_px\tD_py\torbit_x\torbit_px\torbit_y\torbit_py')
 	
 	beta_x = np.array(beta_x)
 	beta_y = np.array(beta_y)

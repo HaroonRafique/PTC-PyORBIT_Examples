@@ -37,7 +37,7 @@ from ext.ptc_orbit.ptc_orbit import updateParamsPTC, synchronousSetPTC, synchron
 from ext.ptc_orbit.ptc_orbit import trackBunchThroughLatticePTC, trackBunchInRangePTC
 from orbit.aperture import TeapotApertureNode
 
-from lib.PyOrbit_PrintLatticeParametersFromPTC import *
+from lib.PyOrbit_PrintLatticeFunctionsFromPTC import *
 from lib.output_dictionary import *
 from lib.pyOrbit_GenerateInitialDistribution2 import *
 from lib.save_bunch_as_matfile import *
@@ -198,7 +198,7 @@ tunes.assignClosedOrbit(*[Twiss_at_parentnode_entrance[k] for k in ['orbitx','or
 addTeapotDiagnosticsNodeAsChild(Lattice, parentnode, tunes)
 
 # Print lattice for turn -1
-PrintLatticeParameters(Lattice, -1, lattice_folder)       
+PrintLatticeFunctions(Lattice, -1, lattice_folder)       
 
 # Add Statistical Lattice Parameters Nodes
 # This command will add one Teapot statlats node at start of each node 
@@ -284,8 +284,8 @@ for turn in range(sts['turn']+1, sts['turns_max']):
 		saveBunchAsMatfile(bunch, "input/mainbunch")
 		saveBunchAsMatfile(bunch, "bunch_output/mainbunch_%s"%(str(turn).zfill(6)))
 		saveBunchAsMatfile(lostbunch, "lost/lostbunch_%s"%(str(turn).zfill(6)))
-		output.save_to_matfile(output_file)		
-		PrintLatticeParameters(Lattice, turn, lattice_folder)        
-		if not rank:
+		output.save_to_matfile(output_file)		    
+		if not rank: 			
+			PrintLatticeFunctions(Lattice, turn, lattice_folder)    
 			with open(status_file, 'w') as fid:
 				pickle.dump(sts, fid)
