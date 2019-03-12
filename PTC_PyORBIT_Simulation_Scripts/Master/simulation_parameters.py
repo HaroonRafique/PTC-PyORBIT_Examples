@@ -6,7 +6,7 @@ tomo_file = 'Input/PyORBIT_Tomo_file.mat'
 gamma = 2.49253731343
 
 # Beam Parameters
-intensity = 2e+12
+intensity = 2e+11
 epsn_x = 2.036e-6
 epsn_y = 2.225e-6
 

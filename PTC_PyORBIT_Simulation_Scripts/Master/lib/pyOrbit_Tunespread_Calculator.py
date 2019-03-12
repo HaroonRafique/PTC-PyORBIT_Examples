@@ -17,7 +17,7 @@
 from spacecharge_tunespread.tunespread import *
 from scipy import constants as const
 
-def TunespreadCalculator(parameters, twissfile='ptc_twiss')	
+def TunespreadCalculator(parameters, twiss_file='ptc_twiss'):
 	
 	# Default particle is proton
 	print 'PyOrbit_Tunespread_Calculator: Assuming particle is a proton. Please change mass if not the case'
@@ -35,16 +35,18 @@ def TunespreadCalculator(parameters, twissfile='ptc_twiss')
 		sig_z = ( 1.0e-9 * beta * const.c * parameters["bunch_length_rms"] / 4.0 )
 	elif 'sig_z' in parameters:
 		sig_z = parameters['sig_z']
-		
-	n_part = parameters['n_macroparticles']
+	
+	n_part = parameters['intensity']
+	# ~ q = parameters['intensity']/parameters['n_macroparticles']
 	
 	if 'epsn_x' in parameters:	epsn_x = parameters['epsn_x']
 	if 'epsn_y' in parameters:	epsn_y = parameters['epsn_y']
 
 	if 'dpp_rms' in parameters: deltap = parameters['dpp_rms']
 		
-	params = {'n_part': n_part, 'emit_norm_x': emit_x, 'emit_norm_y': emit_y, 'gamma': gamma, 'deltap': deltap, 'n_charges_per_part': 1, 'lshape': 1., 'sig_z': sig_z, 'coasting': False} 
+	params = {'n_part': n_part, 'emit_norm_x': epsn_x, 'emit_norm_y': epsn_y, 'gamma': gamma, 'deltap': deltap, 'n_charges_per_part': 1, 'lshape': 1., 'sig_z': sig_z, 'coasting': False} 
 	
+	twissfile = [twiss_file]
 	data, inputs = ext.get_inputs(twissfile, params, False, False)
 	dQ = calc_tune_spread(data, inputs)
 	print inputs

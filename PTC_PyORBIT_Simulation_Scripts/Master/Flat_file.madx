@@ -92,6 +92,11 @@ select, flag=ptc_twiss, column=name, betx, px, bety, py, disp3, disp3p, disp1, d
 ptc_twiss, icase=5, no=4, deltap_dependency, closed_orbit, file, table=ptc_twiss;
 ptc_end;
 
+select, flag=twiss, clear;
+select, flag=twiss, column=NAME, KEYWORD, S, BETX, BETY, ALFX ,ALFY, MUX, MUY, DX, DY;
+set,    format="12.6f";
+twiss,  sequence=PS, file=madx_twiss.tfs, save;
+
 !ptc_create_universe;
 !ptc_create_layout,time=true, model=2, exact=true, method=6, nst=3;
 !select, flag=ptc_twiss, clear;
