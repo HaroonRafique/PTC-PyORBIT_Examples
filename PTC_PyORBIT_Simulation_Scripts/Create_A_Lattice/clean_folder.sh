@@ -8,6 +8,7 @@ rm lib/*.py~
 rm -r input
 rm -r lost
 rm -r output
+rm -r lattice
 rm junk.txt
 rm Maxwellian_bend_for_ptc.txt
 rm ptc_twiss

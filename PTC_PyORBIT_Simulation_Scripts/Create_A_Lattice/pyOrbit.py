@@ -37,7 +37,7 @@ from ext.ptc_orbit.ptc_orbit import updateParamsPTC, synchronousSetPTC, synchron
 from ext.ptc_orbit.ptc_orbit import trackBunchThroughLatticePTC, trackBunchInRangePTC
 from orbit.aperture import TeapotApertureNode
 
-from lib.PyOrbit_PrintLatticeParametersFromPTC import *
+from lib.PyOrbit_PrintLatticeFunctionsFromPTC import *
 from lib.output_dictionary import *
 from lib.pyOrbit_GenerateInitialDistribution2 import *
 from lib.save_bunch_as_matfile import *
@@ -56,6 +56,8 @@ mpi_mkdir_p('input')
 mpi_mkdir_p('bunch_output')
 mpi_mkdir_p('output')
 mpi_mkdir_p('lost')
+lattice_folder = 'lattice'
+mpi_mkdir_p(lattice_folder)
 
 # Dictionary for simulation status
 #-----------------------------------------------------------------------
@@ -195,13 +197,16 @@ tunes.assignTwiss(*[Twiss_at_parentnode_entrance[k] for k in ['betax','alphax','
 tunes.assignClosedOrbit(*[Twiss_at_parentnode_entrance[k] for k in ['orbitx','orbitpx','orbity','orbitpy']])
 addTeapotDiagnosticsNodeAsChild(Lattice, parentnode, tunes)
 
+# Print lattice for turn -1
+PrintLatticeFunctions(Lattice, -1, lattice_folder)       
+
 # Add Statistical Lattice Parameters Nodes
 # This command will add one Teapot statlats node at start of each node 
 # in the lattice. In the output file we will have the columns:
 # (1) azimuthal position around ring, s [m]
 # (2) time
 # (3) emittance_x
-# (4) emittance_y
+# (4) emittance_y21.639883239
 # (5) beta_x [m]
 # (6) beta_y [m]
 # (7) alpha_x
@@ -264,8 +269,8 @@ for turn in range(sts['turn']+1, sts['turns_max']):
 	
 	# ~ readScriptPTC("ptc/update-twiss.ptc") # this is needed to correclty update the twiss functions in all lattice nodes in updateParamsPTC
 	# ~ updateParamsPTC(Lattice,bunch) # to update bunch energy and twiss functions
-	tunes.assignTwiss(*[Twiss_at_parentnode_entrance()[k] for k in ['betax','alphax','etax','etapx','betay','alphay','etay','etapy']])
-	tunes.assignClosedOrbit(*[Twiss_at_parentnode_entrance()[k] for k in ['orbitx','orbitpx','orbity','orbitpy']])
+	# ~ tunes.assignTwiss(*[Twiss_at_parentnode_entrance()[k] for k in ['betax','alphax','etax','etapx','betay','alphay','etay','etapy']])
+	# ~ tunes.assignClosedOrbit(*[Twiss_at_parentnode_entrance()[k] for k in ['orbitx','orbitpx','orbity','orbitpy']])
 	# ~ CO_x.append([n.getParamsDict()['orbitx'] for n in Lattice.getNodes()])
 	# ~ BETA_y.append([n.getParamsDict()['betay'] for n in Lattice.getNodes()])
 	
@@ -279,8 +284,8 @@ for turn in range(sts['turn']+1, sts['turns_max']):
 		saveBunchAsMatfile(bunch, "input/mainbunch")
 		saveBunchAsMatfile(bunch, "bunch_output/mainbunch_%s"%(str(turn).zfill(6)))
 		saveBunchAsMatfile(lostbunch, "lost/lostbunch_%s"%(str(turn).zfill(6)))
-		output.save_to_matfile(output_file)		
-		PrintLatticeParameters(Lattice, turn)        
-		if not rank:
+		output.save_to_matfile(output_file)		    
+		if not rank: 			
+			PrintLatticeFunctions(Lattice, turn, lattice_folder)    
 			with open(status_file, 'w') as fid:
 				pickle.dump(sts, fid)
