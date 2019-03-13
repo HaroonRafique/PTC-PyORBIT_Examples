@@ -1,7 +1,5 @@
 #!/bin/bash
 source /afs/cern.ch/user/p/pyorbit/public/PyOrbit_env/py-orbit/customEnvironment.sh
-source /afs/cern.ch/user/p/pyorbit/public/PyOrbit_env//customEnvironment.sh
-py-orbit_frozenSC_20170731
 echo "customEnvironment done"
 source /afs/cern.ch/user/p/pyorbit/public/PyOrbit_env/virtualenvs/py2.7/bin/activate
 echo "python packages charged"

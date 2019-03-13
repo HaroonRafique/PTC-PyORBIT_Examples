@@ -38,8 +38,8 @@ from orbit.diagnostics import addTeapotMomentsNodeSet, addTeapotStatLatsNodeSet
 from libptc_orbit import *
 from ext.ptc_orbit import PTC_Lattice
 from ext.ptc_orbit import PTC_Node
-from ext.ptc_orbit.ptc_orbit import setBunchParamsPTC, readAccelTableP
-	from simulation_parameters import parameters as pTC, readScriptPTC
+
+from ext.ptc_orbit.ptc_orbit import setBunchParamsPTC, readAccelTablePTC, readScriptPTC
 from ext.ptc_orbit.ptc_orbit import updateParamsPTC, synchronousSetPTC, synchronousAfterPTC
 from ext.ptc_orbit.ptc_orbit import trackBunchThroughLatticePTC, trackBunchInRangePTC
 from orbit.aperture import TeapotApertureNode
@@ -47,7 +47,7 @@ from orbit.aperture import TeapotApertureNode
 from lib.output_dictionary import *
 from lib.pyOrbit_GenerateInitialDistribution2 import *
 from lib.save_bunch_as_matfile import *
-from lib.PyORBIT_Tunespread_Calculator import *
+from lib.pyOrbit_Tunespread_Calculator import *
 
 # MPI initialisation
 #-----------------------------------------------------------------------
@@ -81,7 +81,8 @@ orbit_mpi.MPI_Barrier(comm)
 
 # Print Tunespread data
 #-----------------------------------------------------------------------
-TunespreadCalculator(p)
+from simulation_parameters import tunespread as ts
+TunespreadCalculator(ts, 'madx_twiss.tfs')
 
 sys.exit(1)
 

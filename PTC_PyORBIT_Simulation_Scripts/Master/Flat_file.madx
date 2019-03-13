@@ -1,9 +1,7 @@
-TITLE, "Flat file generation example for PTC-PyORBIT";
+TITLE, "Flat file generation for PTC-PyORBIT";
 
 /***********************************************************************
  * INITIALIZATION
- * RFV can be used to manually seet the RF cavity voltage.
- * This is overridden by a PTC RF table (called from PyORBIT).
  * First we call the files describing the machine, in this case we use 
  * the CERN proton synchrotron (PS).
  **********************************************************************/
@@ -19,7 +17,7 @@ call,  file = './Lattice/PS_2013.aper';
 RFV = 0.024;
 
 /***********************************************************************
- * Create a MADX beam and tell MADX which accelerator lattice to use.
+ * Create a MAD-X beam and tell MAD-X which accelerator lattice to use.
  **********************************************************************/
 beam, particle=proton, pc=pc;
 use, sequence=PS;
@@ -44,13 +42,12 @@ use, sequence=PS;
 
 value, pc, beam->pc, beam->energy;
 
-/******************************************************************
+/***********************************************************************
  * Next we use a ptc macro to match the tunes in the lattice to
  * desired values tune_x and tune_y.
- * The 'resplit.ptc' script may be included if the user wishes to...? 
  *
  * Using model=2, exact=true is recommended.
- ******************************************************************/
+ **********************************************************************/
 tune_x = 0.19;
 tune_y = 0.24;
  
@@ -75,13 +72,13 @@ match, use_macro;
 ENDMATCH;
 value, IQF, IQD;
 
-/******************************************************************
- * First we use the PTC script resplit.ptc - this is used to split
+/***********************************************************************
+ * Next we use the PTC script resplit.ptc - this is used to split
  * defined elements (dipole, quadrupole, sextupole families etc) in
  * order to introduce space charge nodes inside their length. See the
- * file for further information. Next the flat file is generated and 
+ * file for further information. Then the flat file is generated and 
  * saved.
- ******************************************************************/
+ **********************************************************************/
 
 ptc_create_universe;
 ptc_create_layout,time=true, model=2, exact=true, method=6, nst=3;
@@ -92,9 +89,12 @@ select, flag=ptc_twiss, column=name, betx, px, bety, py, disp3, disp3p, disp1, d
 ptc_twiss, icase=5, no=4, deltap_dependency, closed_orbit, file, table=ptc_twiss;
 ptc_end;
 
-!ptc_create_universe;
-!ptc_create_layout,time=true, model=2, exact=true, method=6, nst=3;
-!select, flag=ptc_twiss, clear;
-!select, flag=ptc_twiss, column=name,  betx, px, bety, py, disp3, disp3p, disp1, disp1p;
-!ptc_twiss, icase=5, no=4, deltap_dependency, closed_orbit, file, table=ptc_twiss;
-!ptc_end;
+/***********************************************************************
+ * Finally we output a MAD-X TFS table for use with the tunespread 
+ * calculator.
+ **********************************************************************/
+
+select, flag=twiss, clear;
+select, flag=twiss, column=NAME, KEYWORD, S, BETX, BETY, ALFX ,ALFY, MUX, MUY, DX, DY;
+set,    format="12.6f";
+twiss,  sequence=PS, file=madx_twiss.tfs, save;
