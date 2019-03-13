@@ -2,6 +2,9 @@ import numpy as np
 
 tomo_file = 'Input/PyORBIT_Tomo_file.mat'
 
+# PS injection
+gamma = 2.49253731343
+
 # Beam Parameters
 intensity = 2e+12
 epsn_x = 2.036e-6
@@ -37,10 +40,11 @@ m = 1.2
 TransverseCut = 5
 
 parameters = {
+	'gamma': gamma,
 	'tomo_file': tomo_file,
 	'LongitudinalJohoParameter': m,
 	'LongitudinalCut': 2.4,
-	'blength_rms': blength_rms,
+	'bunch_length_rms': blength_rms,
 	'n_macroparticles': n_macroparticles,
 	'intensity': intensity,
 	'epsn_x': epsn_x,
