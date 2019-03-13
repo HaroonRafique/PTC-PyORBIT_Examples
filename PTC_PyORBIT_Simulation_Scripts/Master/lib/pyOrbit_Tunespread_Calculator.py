@@ -6,12 +6,12 @@
 # particle mass in GeV (provided)
 # Lorentz gamma and beta
 # sig_z or bunch length
-# number of particles
+# bunch intensity
 # normalised or geometrical horizontal emittance 
 #		e_norm = e_geom * beta * gamma
 # normalised or geometrical vertical emittance
 # delta_p/p
-# charge per particle
+# charge per particle (default 1)
 # lineshape (for multiple harmonics, default = 1)
 #-----------------------------------------------------------------------
 from spacecharge_tunespread.tunespread import *
@@ -31,13 +31,12 @@ def TunespreadCalculator(parameters, twiss_file='ptc_twiss'):
 		
 	beta = np.sqrt(gamma**2-1)/gamma
 		
-	if 'bunch_length_rms' in parameters:
-		sig_z = ( 1.0e-9 * beta * const.c * parameters["bunch_length_rms"] / 4.0 )
+	if 'bunch_length' in parameters:
+		sig_z = ( 1.0e-9 * beta * const.c * parameters["bunch_length"] / 4.0 )
 	elif 'sig_z' in parameters:
 		sig_z = parameters['sig_z']
 	
 	n_part = parameters['intensity']
-	# ~ q = parameters['intensity']/parameters['n_macroparticles']
 	
 	if 'epsn_x' in parameters:	epsn_x = parameters['epsn_x']
 	if 'epsn_y' in parameters:	epsn_y = parameters['epsn_y']
@@ -52,5 +51,18 @@ def TunespreadCalculator(parameters, twiss_file='ptc_twiss'):
 	print inputs
 	ext.print_verbose_output(inputs, data, dQ[0], dQ[1])
 	print "dQx = %2.3f, dQy = %2.3f"%(dQ[0], dQ[1])
+	
+	f = open('tunespread.dat',"w+")
+	f.write('# Tunespread calculation inputs:')
+	for key, value in inputs.iteritems():
+		f.write('\n')
+		f.write(str(key))
+		f.write('\t')
+		f.write(str(value))
+	# ~ f.write(str(inputs))
+	f.write('\n')
+	f.write('\n# Tunespreads:\n')
+	f.write("dQx = %2.3f\ndQy = %2.3f"%(dQ[0], dQ[1]))
+	f.close()
 	
 	return

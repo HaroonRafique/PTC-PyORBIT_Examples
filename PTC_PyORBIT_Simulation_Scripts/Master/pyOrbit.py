@@ -81,7 +81,8 @@ orbit_mpi.MPI_Barrier(comm)
 
 # Print Tunespread data
 #-----------------------------------------------------------------------
-TunespreadCalculator(p, 'madx_twiss.tfs')
+from simulation_parameters import tunespread as ts
+TunespreadCalculator(ts, 'madx_twiss.tfs')
 
 sys.exit(1)
 
