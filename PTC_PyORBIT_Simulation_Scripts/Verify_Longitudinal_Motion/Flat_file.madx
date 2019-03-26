@@ -1,0 +1,100 @@
+TITLE, "Flat file generation for PTC-PyORBIT";
+
+/***********************************************************************
+ * INITIALIZATION
+ * First we call the files describing the machine, in this case we use 
+ * the CERN proton synchrotron (PS).
+ **********************************************************************/
+call,  file = './Lattice/PS_new.ele';
+call,  file = './Lattice/PS_new.seq';
+call,  file = './Lattice/PS_new.str';
+call,  file = './Lattice/PS_2013.aper';
+
+/***********************************************************************
+ * RFV can be used to manually seet the RF cavity voltage.
+ * This is overridden by a PTC RF table (called from PyORBIT).
+ **********************************************************************/
+RFV = 0.024;
+
+/***********************************************************************
+ * Create a MAD-X beam and tell MAD-X which accelerator lattice to use.
+ **********************************************************************/
+beam, particle=proton, pc=pc;
+use, sequence=PS;
+
+/***********************************************************************
+ * Here we manually edit the sequence (lattice) to install a zero length
+ * beam wire scanner at the start of region 65. We then save the new 
+ * sequence to a file.
+ **********************************************************************/
+PR.BWSH65     :  MONITOR  , L = 0.0; 
+
+seqedit, sequence=PS;
+	flatten;
+	install, element=PR.BWSH65, at=0.0, from=PS65$START;
+	cycle , start=PR.BWSH65;
+	flatten;
+endedit;
+
+save,file='./Lattice/PS.seq';
+
+use, sequence=PS;
+
+value, pc, beam->pc, beam->energy;
+
+/***********************************************************************
+ * Next we use a ptc macro to match the tunes in the lattice to
+ * desired values tune_x and tune_y.
+ *
+ * Using model=2, exact=true is recommended.
+ **********************************************************************/
+tune_x = 0.19;
+tune_y = 0.24;
+ 
+ptc_twiss_tune_macro_false_split: macro={
+  ptc_create_universe;
+  ptc_create_layout, time=true, model=2, exact=true, method=6, nst=3;
+  ptc_twiss, closed_orbit, table = ptc_twiss, icase=56, no=2, summary_table=ptc_twiss_summary;
+  qx0=table(ptc_twiss_summary,Q1);
+  qy0=table(ptc_twiss_summary,Q2);
+  value, qx0, qy0;
+  ptc_end;
+};
+
+use, sequence=PS;
+match, use_macro;
+  vary,   name=iqf, step=1.0E-6 ;
+  vary,   name=iqd, step=1.0E-6 ;
+  USE_MACRO, name=ptc_twiss_tune_macro_false_split;
+  CONSTRAINT, expr=  table(ptc_twiss_summary,Q1)= tune_x;
+  CONSTRAINT, expr=  table(ptc_twiss_summary,Q2)= tune_y;
+  JACOBIAN,calls=10000,bisec=3,TOLERANCE=1.0E-21;
+ENDMATCH;
+value, IQF, IQD;
+
+/***********************************************************************
+ * Next we use the PTC script resplit.ptc - this is used to split
+ * defined elements (dipole, quadrupole, sextupole families etc) in
+ * order to introduce space charge nodes inside their length. See the
+ * file for further information. Then the flat file is generated and 
+ * saved.
+ **********************************************************************/
+
+ptc_create_universe;
+ptc_create_layout,time=true, model=2, exact=true, method=6, nst=3;
+ptc_script, file="./PTC/resplit.ptc";
+ptc_script, file="./PTC/print_flat_file.ptc";
+select, flag=ptc_twiss, clear; 
+select, flag=ptc_twiss, column=name, betx, px, bety, py, disp3, disp3p, disp1, disp1p;
+ptc_twiss, icase=5, no=4, deltap_dependency, closed_orbit, file, table=ptc_twiss;
+ptc_end;
+
+/***********************************************************************
+ * Finally we output a MAD-X TFS table for use with the tunespread 
+ * calculator.
+ **********************************************************************/
+
+select, flag=twiss, clear;
+select, flag=twiss, column=NAME, KEYWORD, S, BETX, BETY, ALFX ,ALFY, MUX, MUY, DX, DY;
+set,    format="12.6f";
+twiss,  sequence=PS, file=madx_twiss.tfs, save;
