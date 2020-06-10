@@ -1,3 +1,0 @@
-0.0	1.000E-003 0 f ! initial time, time units [ms], initial number of turns, false (no time patch)
-1					! Number of RF cavities in the machine
-0.000E+000			! ct value at the beginning of tracking

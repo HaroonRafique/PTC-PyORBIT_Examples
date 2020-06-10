@@ -1,6 +1,0 @@
-select layout
-1
-ptc twiss
-TWISS_PTC_table.OUT ###### true
-0.0
-return

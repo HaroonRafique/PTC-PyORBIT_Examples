@@ -1,0 +1,9 @@
+select layout
+1
+GETCHROMATICITY
+print flat file
+flat.dat
+PTCNODEFILE
+Negative_node.OUT
+PRINTORBITNODES
+return
