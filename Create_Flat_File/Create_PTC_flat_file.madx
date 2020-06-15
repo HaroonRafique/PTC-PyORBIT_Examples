@@ -1,0 +1,211 @@
+TITLE, "Flat file generation for PTC-PyORBIT";
+/***********************************************************************
+ *                  CERN Proton Synchrotron: Injection
+ *        Create PTC Flat File for PTC-PyORBIT lattice definition
+ *
+ * Last Edit: 11.06.20 Haroon Rafique CERN BE-ABP-HSI
+ **********************************************************************/
+
+
+/***********************************************************************
+ *                       USER SETTINGS FLAGS
+ *
+ *      Here we have the necessary files and macros for:
+ *      ------------------------------------------------
+ *      - Run2 and Run3, LHC BCMS and Standard beams.
+ *      - PS Injection settings NOT including injection bump.
+ *      - Addition of single or distributed quadrupolar error.
+ *      - Matching of tunes using Low Energy Quadrupoles (LEQs) or 
+ *        Pole Face Windings (PFWs).
+ *      - Matching of chromaticity using PFWs.
+ *      - Changing the lattice start position (arbitrary but important
+ *        for initial distribution etc).
+ *
+ **********************************************************************/
+
+quad_error = 0;	                ! Add quadrupolar error on QDN72
+distributed_quad_error = 0;	! Add quadrupolar error on all QDNs
+
+match_tunes = 0;                ! Match tunes to values in tunes.str
+use_pfw = 0;	                ! Match tunes with PFW (1) or LEQ (0)
+match_chroma = 0;               ! Match chromaticity to given values
+
+BCMS = 0;		!Harmonic 9 for BCMS, 7 for Standard LHC beams
+LIU = 1;		!LIU (1) KE = 2GeV, pre-LIU (0) KE = 1.4GeV
+
+start_lattice_marker = 0;
+
+/***********************************************************************
+ * INITIALIZATION
+ * First we call the files describing the machine, in this case we use 
+ * the CERN proton synchrotron (PS).
+ **********************************************************************/
+call, file="PS_Lattice/ps_mu.seq";
+IF(BCMS==1){call, file="PS_Lattice/ps_ss_h9.seq";}
+ELSE{call, file="PS_Lattice/ps_ss_h7.seq";}
+call, file="PS_Lattice/ps.str";
+call, file="PS_Lattice/ps_fb_lhc.str";
+call, file="PS_Lattice/macros.ptc";
+call, file="tunes.str";
+
+/***********************************************************************
+ * Create a MAD-X beam and tell MAD-X which accelerator lattice to use.
+ **********************************************************************/
+IF(LIU==1){beam, particle=proton, pc=2.7844;}
+ELSE{beam, particle=proton, pc=2.14;}
+BRHO      := BEAM->PC * 3.3356;
+
+/***********************************************************************
+**                     START Lattice Position                         **
+***********************************************************************/
+seqedit,sequence = PS;
+	flatten;
+endedit;
+
+! Optimisation - remove unneccesary lattice elements for space charge simulations
+seqedit,sequence = PS;
+	call, file = 'PS_Lattice/remove_elements.seq';
+	remove, element=SELECTED;
+endedit;
+
+seqedit, sequence=PS;
+	flatten;
+	!cycle , start=PR.BWSV64;
+	cycle , start=PR.BWSH65;
+	flatten;
+endedit;
+
+! Use this if PTC doesn't find a closed solution - replace MONITOR with MARKER
+IF(start_lattice_marker==1){
+	START_LATTICE: MARKER;
+
+	seqedit,sequence = PS;
+		flatten;
+		!REPLACE, ELEMENT=PR.BWSH65, BY=START_LATTICE;
+		REPLACE, ELEMENT=PR.BWSV64, BY=START_LATTICE;
+		cycle , start = START_LATTICE;
+	endedit;
+}
+
+/***********************************************************************
+ * PTC TWISS - output of beam dynamics parameters for each element in a 
+ * PTC 'Twiss Table'. Note this is not the same as a MAD-X Twiss.
+ **********************************************************************/
+! PTC integration parameters
+
+propagation_method = 2; 
+order_of_integrator = 6;
+
+! propagation_method 1: Drift-Kick-Drift
+! 2 = 2nd order, one kick per integration step, naive.
+! 4 = Ruth-Neri-Yoshida 4th order method, 3 kicks per integration step.
+! 6 = Yoshida 6th order method, 7 kicks per integration step.
+
+! propagation_method 2: Matrix-Kick-Matrix
+! 2 = Euler-like Matrix-Kick-Matrix
+! 4 = Simpson-like (1/6)K-M-(2/3)K-M-(1/6)K
+! 6 = Bode-like (7/90)K-M-(32/90)K-M-(12/90)K-M-(32/90)K-M-(7/90)K
+
+! exact = true ensures SBENDs orbit is correct
+! avoids quadrupole feed-down effects leading to closed orbit distortions
+exact_flag = true;
+
+! time=true: every derivative wrt dp/p needs to be multiplied by the relativistic beta DQ1, DISP1,...) required for flat file generation!
+! time=false: forget about beta and take the value as it is - use for PTC_Twiss 
+time_flag = false;
+
+integration_steps_per_element = 5; ! 3;
+map_order = 5;
+
+! Only call this once or ther errors are erased
+use, sequence=PS;
+
+ptc_create_universe;
+ptc_create_layout, time=false, model=propagation_method, method=order_of_integrator, nst=integration_steps_per_element, exact=true;
+select, flag=ptc_twiss, clear; 
+select, flag=ptc_twiss, column=name, s, betx, bety, alfx, alfy, disp1, disp3, mux, muy, x, px, y, py;
+ptc_twiss, icase=5, no=map_order, closed_orbit, file=optimised_bare_simplified.tfs, table=ptc_twiss;
+ptc_end;
+
+/***********************************************************************
+ * Add quadrupole error - define Beta_beating in percentage in tunes.str
+ * Calculate quadrupole error using equation found on slide 76 of 
+ * Hannes Bartosik's JUAS 19' lecture on Linear Imperfections and
+ * Correction: https://indico.cern.ch/event/779575/contributions/3244531/attachments/1782159/2905799/linearimperfections_2019.pdf
+ **********************************************************************/
+
+IF(quad_error==1){EXEC, QDN78_error(beta_beating);}
+IF(distributed_quad_error==1){EXEC, distributed_qfn_error(beta_beating);}
+
+/**********************************************************************************
+ *                        Matching using the PFW
+ *
+ * Tune values based on measurement without LEQ along the flat bottom 
+ * recorded on 06.11.2018
+ * Values based on non-linear chromaticity measurement along the cycle 
+ * recorded on 01.11.2018
+***********************************************************************************/
+
+! bare machine
+! Qx = 0.2454 + -5.34645*x + 24.03831*x^2
+! Qy = 0.28368 + -7.16314*x + 42.3747*x^2
+!Qx   :=  0.2454;
+!Qxp  := -5.34645;
+!Qxp2 := 24.03831;
+!Qy   :=  0.28368;
+!Qyp  := -7.16314;
+!Qyp2 := 42.3747;
+
+! Flat bottom
+! Qx = 0.21122 + 0.73706*x + 49.71225*x^2
+! Qy = 0.32396 + -2.92869*x + 4.99208*x^2
+!Qx := 0.21122;
+Qxp := 0.73706;
+Qxp2 := 49.71225;
+!Qy := 0.32396;
+Qyp := -2.92869;
+Qyp2 := 4.99208;
+
+IF(match_tunes==1){EXEC, match_Tunes(use_pfw, tune_x, tune_y);}
+IF(match_chroma==1){EXEC, match_Chroma_PFW(Qxp, Qyp, Qxp2, Qyp2);}
+
+value, tune_x, tune_y, Qxp, Qyp; 
+
+/***********************************************************************
+ * Next we use the PTC script resplit.ptc - this is used to split
+ * defined elements (dipole, quadrupole, sextupole families etc) in
+ * order to introduce space charge nodes inside their length. See the
+ * file for further information. Then the flat file is generated and 
+ * saved.
+ **********************************************************************/
+ptc_create_universe;
+ptc_create_layout,time=true, model=propagation_method, exact=true, method=order_of_integrator, nst=integration_steps_per_element;
+ptc_script, file="./PTC/resplit.ptc";
+ptc_script, file="./PTC/print_flat_file.ptc";
+select, flag=ptc_twiss, clear; 
+select, flag=ptc_twiss, column=name, s, betx, bety, alfx, alfy, disp1, disp2, disp3, disp4, x, px, y, py;
+ptc_twiss, icase=5, no=map_order, deltap_dependency, closed_orbit, file=optimised_flat_file.tfs, table=ptc_twiss;
+ptc_end;
+
+
+/***********************************************************************
+ * Finally we make some plots
+ **********************************************************************/
+setplot, font=4, xsize=34, ysize=25;
+
+plot, table=ptc_twiss, haxis=s, vaxis=betx, hmin=0, hmax=630, vmin=10, vmax=30, title='Horizontal Beta', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=bety, hmin=0, hmax=630, vmin=10, vmax=30, title='Vertical Beta', colour=4, NOLINE=False, NOVERSION=False;
+! Vertical Scan
+plot, table=ptc_twiss, haxis=s, vaxis=disp1, hmin=0, hmax=630, vmin=2.2, vmax=3.8, title='Horizontal Dispersion', colour=2, NOLINE=False, NOVERSION=False;
+! Horizontal Scan
+!plot, table=ptc_twiss, haxis=s, vaxis=disp1, hmin=0, hmax=630, vmin=1.0, vmax=5.5, title='Horizontal Dispersion', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=disp2, hmin=0, hmax=630, vmin=-0.6, vmax=-0.6,  title='Horizontal Dispersion Prime', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=x, hmin=0, hmax=630, title='x', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=y, hmin=0, hmax=630, title='y', colour=4, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=px, hmin=0, hmax=630, title='px', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=py, hmin=0, hmax=630, title='py', colour=4, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=disp3, hmin=0, hmax=630, title='Vertical Dispersion Prime', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=disp4, hmin=0, hmax=630, title='Vertical Dispersion Prime', colour=4, NOLINE=False, NOVERSION=False;
+
+value, kf, kd, pfwk1_f, pfwk1_d, pfwk2_f, pfwk2_d, pfwk3_f, pfwk3_d;
+value, tune_x, tune_y, Qxp, Qyp; 
