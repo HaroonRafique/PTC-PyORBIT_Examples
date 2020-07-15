@@ -31,7 +31,7 @@ use_pfw = 0;	                ! Match tunes with PFW (1) or LEQ (0)
 match_chroma = 0;               ! Match chromaticity to given values
 
 BCMS = 0;		!Harmonic 9 for BCMS, 7 for Standard LHC beams
-LIU = 1;		!LIU (1) KE = 2GeV, pre-LIU (0) KE = 1.4GeV
+LIU = 0;		!LIU (1) KE = 2GeV, pre-LIU (0) KE = 1.4GeV
 
 start_lattice_marker = 0;
 
@@ -123,7 +123,7 @@ use, sequence=PS;
 ptc_create_universe;
 ptc_create_layout, time=false, model=propagation_method, method=order_of_integrator, nst=integration_steps_per_element, exact=true;
 select, flag=ptc_twiss, clear; 
-select, flag=ptc_twiss, column=name, s, betx, bety, alfx, alfy, disp1, disp3, mux, muy, x, px, y, py;
+select, flag=ptc_twiss, column=name, s, betx, bety, alfx, alfy, disp1, disp3, mu1, mu2, x, px, y, py;
 ptc_twiss, icase=5, no=map_order, closed_orbit, file=optimised_bare_simplified.tfs, table=ptc_twiss;
 ptc_end;
 
@@ -183,7 +183,7 @@ ptc_create_layout,time=true, model=propagation_method, exact=true, method=order_
 ptc_script, file="./PTC/resplit.ptc";
 ptc_script, file="./PTC/print_flat_file.ptc";
 select, flag=ptc_twiss, clear; 
-select, flag=ptc_twiss, column=name, s, betx, bety, alfx, alfy, disp1, disp2, disp3, disp4, x, px, y, py;
+select, flag=ptc_twiss, column=name, s, betx, bety, alfx, alfy, disp1, disp2, disp3, disp4, mu1, mu2, x, px, y, py;
 ptc_twiss, icase=5, no=map_order, deltap_dependency, closed_orbit, file=optimised_flat_file.tfs, table=ptc_twiss;
 ptc_end;
 
