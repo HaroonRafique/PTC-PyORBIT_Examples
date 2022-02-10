@@ -27,8 +27,15 @@ A repository of useful example and processing scripts for PTC PyORBIT
     - [ ] Frozen
     - [ ] PIC (Particle-in-cell)
     - [ ] Longitudinal
+- [ ] Bunch tracking
+    - [ ] Single pass
+    - [ ] Multiple turns
 - [ ] Output
     - [ ] PyORBIT output
     - [ ] User defined output library
     - [ ] PTC Twiss
     - [ ] Bunch output
+- [ ] Analysis (performed in jupyter ipython notebooks):
+    - [ ] Plot bunch
+    - [ ] Plot outputs
+    - [ ] Plot Twiss
