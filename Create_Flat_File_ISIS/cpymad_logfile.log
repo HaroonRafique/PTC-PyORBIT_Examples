@@ -1,0 +1,2210 @@
+
+  ++++++++++++++++++++++++++++++++++++++++++++
+  +     MAD-X 5.07.00  (64 bit, Linux)       +
+  + Support: mad@cern.ch, http://cern.ch/mad +
+  + Release   date: 2021.05.03               +
+  + Execution date: 2022.03.15 14:47:03      +
+  ++++++++++++++++++++++++++++++++++++++++++++
+beam, particle = proton, pc = 0.37033168;
+
+! DRIFTS
+
+! --------------------------------------------------------------
+
+
+
+s1      : drift, l=1.31;
+
+s2      : drift, l=1.2394;
+
+s3      : drift, l=0.09765;   
+
+s4      : drift, l=0.09765;
+
+s5      : drift, l=0.0967;
+
+s6      : drift, l=1.0;
+
+s7      : drift, l=1.0;
+
+s8      : drift, l=1.0;
+
+s9      : drift, l=1.0;
+
+s10     : drift, l=1.2445;
+
+s11     : drift, l=.031582;
+
+
+
+! MAIN DIPOLE - modelled as 6 sbend sections
+
+! with 5 fringe field sbends at each end
+
+! --------------------------------------------------------------
+
+
+
+dipfr1  : sbend, l=0.03, k1=-0.00106696, angle=0.000097;
+
+dipfr2  : sbend, l=0.20, k1=-0.00081196, angle=.0011260;
+
+dipfr3  : sbend, l=0.16, k1=0.01101772, angle=.0070260;
+
+dipfr4  : sbend, l=0.04, k1=0.01101772, angle=.0017570;
+
+dipfr5  : sbend, l=0.2,  k1=0.07106712, angle=.0242660;
+
+dip1    : sbend, l=0.06, k1:=dip1_k1, angle:=dip1_angle;
+
+dip2    : sbend, l=1.0,  k1:=dip2_k1, angle:=dip2_angle;
+
+dip3    : sbend, l=1.0,  k1:=dip3_k1, angle:=dip3_angle;
+
+dip4    : sbend, l=1.0,  k1:=dip4_k1, angle:=dip4_angle;
+
+dip5    : sbend, l=0.8,  k1:=dip5_k1, angle:=dip5_angle;
+
+dip6    : sbend, l=0.06, k1:=dip6_k1, angle:=dip6_angle;
+
+dipfr6  : sbend, l=0.2,  k1=0.07106712, angle=.0242660;
+
+dipfr7  : sbend, l=0.04, k1=0.01101772, angle=.0017570;
+
+dipfr8  : sbend, l=0.16, k1=0.01101772, angle=.0070260;
+
+dipfr9  : sbend, l=0.2,  k1=-0.00081196, angle=.0011260;
+
+dipfr10 : sbend, l=0.03, k1=-0.00106696, angle=.0000970;
+
+
+
+! INJECTION DIPOLE
+
+! --------------------------------------------------------------
+
+!ib2 : rbend, l=0.5, angle=0.04504, e1=0.04504, e2=0.0; ! From BKs HEDS model
+
+
+
+idip1 : rbend, l=0.5, angle:=idip1_angle;
+
+idip2 : rbend, l=0.5, angle:=idip2_angle;
+
+idip3 : rbend, l=0.5, angle:=idip3_angle;
+
+idip4 : rbend, l=0.5, angle:=idip4_angle;
+
+
+
+!idip1 : hkicker, l=0.001, kick:=idip1_angle;
+
+!idip2 : hkicker, l=0.001, kick:=idip2_angle;
+
+!idip3 : hkicker, l=0.001, kick:=idip3_angle;
+
+!idip4 : hkicker, l=0.001, kick:=idip4_angle;
+
+
+
+! MAIN QUADRUPOLES - modelled as multiple quadrupole sections
+
+! --------------------------------------------------------------
+
+
+
+qdfr1   : quadrupole, l=0.05275, k1=-.07954129; 
+
+qdfr2   : quadrupole, l=0.05275, k1=-.23862467;
+
+qdfr3   : quadrupole, l=0.05275, k1=-.39770806;
+
+qdfr4   : quadrupole, l=0.05275, k1=-.55679063;
+
+qd      : quadrupole, l=0.51920, k1=-.63633192;
+
+qdfr5   : quadrupole, l=0.05275, k1=-.55679063;
+
+qdfr6   : quadrupole, l=0.05275, k1=-.39770806;
+
+qdfr7   : quadrupole, l=0.05275, k1=-.23862467;
+
+qdfr8   : quadrupole, l=0.05275, k1=-.07954129;
+
+
+
+qffr1   : quadrupole, l=0.05275, k1=.07957934; 
+
+qffr2   : quadrupole, l=0.05275, k1=.23873962; 
+
+qffr3   : quadrupole, l=0.05275, k1=.39789910;
+
+qffr4   : quadrupole, l=0.05275, k1=.55705778; 
+
+qf      : quadrupole, l=0.50420, k1=.63663711;
+
+qffr5   : quadrupole, l=0.05275, k1=.55705778;
+
+qffr6   : quadrupole, l=0.05275, k1=.39789910; 
+
+qffr7   : quadrupole, l=0.05275, k1=.23873962; 
+
+qffr8   : quadrupole, l=0.05275, k1=.07957934;     
+
+
+
+qdsfr1  : quadrupole, l=.03875, k1=-.09091520;
+
+qdsfr2  : quadrupole, l=.03875, k1=-.27274479;
+
+qdsfr3  : quadrupole, l=.03875, k1=-.45457519;
+
+qdsfr4  : quadrupole, l=.03875, k1=-.63640478;
+
+qds     : quadrupole, l=.2474, k1=-.72731997;
+
+qdsfr5  : quadrupole, l=.03875, k1=-.63640478;
+
+qdsfr6  : quadrupole, l=.03875, k1=-.45457519;
+
+qdsfr7  : quadrupole, l=.03875, k1=-.27274479;
+
+qdsfr8  : quadrupole, l=.03875, k1=-.09091520;
+
+
+
+! TRIM QUADRUPOLES
+
+! --------------------------------------------------------------
+
+
+
+qtd     : quadrupole, l=0.307, k1:=kqtd;
+
+
+
+qtf     : quadrupole, l=0.307, k1:=kqtf;
+
+
+
+r0qtf : qtf, k1 := kqtf_0;
+
+r1qtf : qtf, k1 := kqtf_1;
+
+r2qtf : qtf, k1 := kqtf_2;
+
+r3qtf : qtf, k1 := kqtf_3;
+
+r4qtf : qtf, k1 := kqtf_4;
+
+r5qtf : qtf, k1 := kqtf_5;
+
+r6qtf : qtf, k1 := kqtf_6;
+
+r7qtf : qtf, k1 := kqtf_7;
+
+r8qtf : qtf, k1 := kqtf_8;
+
+r9qtf : qtf, k1 := kqtf_9;
+
+
+
+r0qtd : qtd, k1 := kqtd_0;
+
+r1qtd : qtd, k1 := kqtd_1;
+
+r2qtd : qtd, k1 := kqtd_2;
+
+r3qtd : qtd, k1 := kqtd_3;
+
+r4qtd : qtd, k1 := kqtd_4;
+
+r5qtd : qtd, k1 := kqtd_5;
+
+r6qtd : qtd, k1 := kqtd_6;
+
+r7qtd : qtd, k1 := kqtd_7;
+
+r8qtd : qtd, k1 := kqtd_8;
+
+r9qtd : qtd, k1 := kqtd_9;
+
+
+
+
+
+! MONITORS & KICKERS
+
+! --------------------------------------------------------------
+
+
+
+R0HD1 : HKICKER , L=0.001 , kick := r0hd1_kick; 
+
+R0HM1 : HMONITOR, L=0.001; 
+
+R0VM1 : VMONITOR, L=0.001; 
+
+R0VD1 : VKICKER , L=0.001 , kick := r0vd1_kick;
+
+R0HM2 : HMONITOR, L=0.001; 
+
+
+
+R1HM1 : HMONITOR, L=0.001; 
+
+R1VM1 : VMONITOR, L=0.001; 
+
+R1HM2 : HMONITOR, L=0.001; 
+
+R1VM2 : VMONITOR, L=0.001; 
+
+
+
+R2HM1 : HMONITOR, L=0.001;
+
+R2VM1 : VMONITOR, L=0.001;
+
+R2VD1 : VKICKER , L=0.001 , kick := r2vd1_kick;
+
+R2HM2 : HMONITOR, L=0.001;
+
+R2HD1 : HKICKER,  L=0.001 , kick := r2hd1_kick;
+
+R2VM2 : VMONITOR, L=0.001;
+
+
+
+R3VM1 : VMONITOR, L=0.001;
+
+R3VD1 : VKICKER , L=0.001 , kick := r3vd1_kick;
+
+R3VM2 : VMONITOR, L=0.001;
+
+R3HD1 : HKICKER , L=0.001 , kick := r3hd1_kick;
+
+R3HM1 : HMONITOR, L=0.001;
+
+R3VM3 : VMONITOR, L=0.001;
+
+
+
+R4HM1 : HMONITOR, L=0.001;
+
+R4VM1 : VMONITOR, L=0.001;
+
+R4HM2 : HMONITOR, L=0.001;
+
+R4HD1 : HKICKER , L=0.001 , kick := r4hd1_kick;
+
+R4VD1 : VKICKER , L=0.001 , kick := r4vd1_kick;
+
+R4VM2 : VMONITOR, L=0.001;
+
+
+
+R5VM1 : VMONITOR, L=0.001;
+
+R5VD1 : VKICKER , L=0.001 , kick := r5vd1_kick;
+
+R5HM1 : HMONITOR, L=0.001;
+
+R5HD1 : HKICKER , L=0.001 , kick := r5hd1_kick;
+
+R5HPM1: HMONITOR, L=0.001;
+
+R5WIRE: MONITOR, L=0.001;
+
+R5VM2 : VMONITOR, L=0.001;
+
+R5HPM2: HMONITOR, L=0.001;
+
+
+
+R6HPM1: HMONITOR, L=0.001;
+
+R6HM1 : HMONITOR, L=0.001;
+
+R6VM1 : VMONITOR, L=0.001;
+
+R6VPM1: VMONITOR, L=0.001;
+
+R6HM2 : HMONITOR, L=0.001;
+
+R6HM3 : HMONITOR, L=0.001;
+
+R6VM2 : VMONITOR, L=0.001;
+
+R6VPM2: VMONITOR, L=0.001;
+
+
+
+R7VM1 : VMONITOR, L=0.001;
+
+R7VM2 : VMONITOR, L=0.001;
+
+R7VD1 : VKICKER , L=0.001 , kick := r7vd1_kick;
+
+R7HM1 : HMONITOR, L=0.001;
+
+R7HM2 : HMONITOR, L=0.001;
+
+R7HD1 : HKICKER , L=0.001 , kick := r7hd1_kick;
+
+R7VM3 : VMONITOR, L=0.001;
+
+
+
+R8HM1 : HMONITOR, L=0.001;
+
+R8VM1 : VMONITOR, L=0.001;
+
+R8HM2 : HMONITOR, L=0.001;
+
+R8VM2 : VMONITOR, L=0.001;
+
+
+
+R9VM2 : VMONITOR, L=0.001;
+
+R9HM1 : HMONITOR, L=0.001;
+
+R9HD1 : HKICKER , L=0.000 , kick := r9hd1_kick;
+
+R9VD1 : VKICKER , L=0.001 , kick := r9vd1_kick;
+
+R9VM3 : VMONITOR, L=0.001;
+
+
+
+! MARKERS
+
+! --------------------------------------------------------------
+
+
+
+! Extraction kickers
+
+K1    : MARKER;
+
+K2    : MARKER;
+
+K3    : MARKER;
+
+
+
+FOIL  : MARKER;
+
+VCP1  : MARKER;
+
+HCP1  : MARKER;
+
+VCS0  : MARKER;
+
+VCS1  : MARKER;
+
+HCS1  : MARKER;
+
+VCS2  : MARKER;
+
+EXTWIRE : MARKER;
+
+SEPNI : MARKER;
+
+HCS3  : MARKER;
+
+MICE  : MARKER;
+
+//ISIS Strength File
+
+
+
+! MAIN DIPOLES (combined function)
+
+! --------------------------------------------------------------
+
+
+
+! Dipole components
+
+
+
+dip1_angle:=0.0085680;
+
+dip2_angle:=0.1428000;
+
+dip3_angle:=0.1428000;
+
+dip4_angle:=0.1428000;
+
+dip5_angle:=0.11428000;
+
+dip6_angle:=0.0085680;
+
+
+
+! Quadrupole components
+
+
+
+dip1_k1:=0.06782332;
+
+dip2_k1:=0.06782332;
+
+dip3_k1:=0.06782332;
+
+dip4_k1:=0.06782332;
+
+dip5_k1:=0.06782332;
+
+dip6_k1:=0.06782332;
+
+
+
+! INJECTION DIPOLES
+
+! --------------------------------------------------------------
+
+idip1_angle:=0.0;
+
+idip2_angle:=0.0;
+
+idip3_angle:=0.0;
+
+idip4_angle:=0.0;
+
+
+
+! STEERING CORRECTORS (KICKERS)
+
+! --------------------------------------------------------------
+
+
+
+r0hd1_kick:=0.0;
+
+r2hd1_kick:=0.0;
+
+r3hd1_kick:=0.0;
+
+r4hd1_kick:=0.0;
+
+r5hd1_kick:=0.0;
+
+r7hd1_kick:=0.0;
+
+r9hd1_kick:=0.0;
+
+
+
+r0vd1_kick:=0.0;
+
+r2vd1_kick:=0.0;
+
+r3vd1_kick:=0.0;
+
+r4vd1_kick:=0.0;
+
+r5vd1_kick:=0.0;
+
+r7vd1_kick:=0.0;
+
+r9vd1_kick:=0.0;
+
+
+
+! TRIM QUADRUPOLES
+
+! --------------------------------------------------------------
+
+// nominal numbers for 4.31 and 3.83 lattice
+
+kqtd := .00610063;    
+
+kqtf := -.01155444;
+
+
+
+kqtd_0 := kqtd + HER0qtd;
+
+kqtd_1 := kqtd + HER1qtd;
+
+kqtd_2 := kqtd + HER2qtd;
+
+kqtd_3 := kqtd + HER3qtd;
+
+kqtd_4 := kqtd + HER4qtd;
+
+kqtd_5 := kqtd + HER5qtd;
+
+kqtd_6 := kqtd + HER6qtd;
+
+kqtd_7 := kqtd + HER7qtd;
+
+kqtd_8 := kqtd + HER8qtd;
+
+kqtd_9 := kqtd + HER9qtd;
+
+    
+
+kqtf_0:= kqtf + HER0qtf;
+
+kqtf_1:= kqtf + HER1qtf;
+
+kqtf_2:= kqtf + HER2qtf;
+
+kqtf_3:= kqtf + HER3qtf;
+
+kqtf_4:= kqtf + HER4qtf;
+
+kqtf_5:= kqtf + HER5qtf;
+
+kqtf_6:= kqtf + HER6qtf;
+
+kqtf_7:= kqtf + HER7qtf;
+
+kqtf_8:= kqtf + HER8qtf;
+
+kqtf_9:= kqtf + HER9qtf;
+
+
+
+! HARMONIC FUNCTIONS
+
+! --------------------------------------------------------------
+
+
+
+! Amplitude and Harmonic for QTD
+
+a1:=0.000;
+
+b1:=0.000;
+
+hn1:=7;
+
+
+
+! Amplitude and Harmonic for QTF
+
+a2:=0.000;
+
+b2:=0.000;
+
+hn2:=8;
+
+
+
+HER0qtd:=(a1*cos(hn1*(0/10)*2*PI))+(b1*sin(hn1*(0/10)*2*PI));
+
+HER1qtd:=(a1*cos(hn1*(1/10)*2*PI))+(b1*sin(hn1*(1/10)*2*PI));
+
+HER2qtd:=(a1*cos(hn1*(2/10)*2*PI))+(b1*sin(hn1*(2/10)*2*PI));
+
+HER3qtd:=(a1*cos(hn1*(3/10)*2*PI))+(b1*sin(hn1*(3/10)*2*PI));
+
+HER4qtd:=(a1*cos(hn1*(4/10)*2*PI))+(b1*sin(hn1*(4/10)*2*PI));
+
+HER5qtd:=(a1*cos(hn1*(5/10)*2*PI))+(b1*sin(hn1*(5/10)*2*PI));
+
+HER6qtd:=(a1*cos(hn1*(6/10)*2*PI))+(b1*sin(hn1*(6/10)*2*PI));
+
+HER7qtd:=(a1*cos(hn1*(7/10)*2*PI))+(b1*sin(hn1*(7/10)*2*PI));
+
+HER8qtd:=(a1*cos(hn1*(8/10)*2*PI))+(b1*sin(hn1*(8/10)*2*PI));
+
+HER9qtd:=(a1*cos(hn1*(9/10)*2*PI))+(b1*sin(hn1*(9/10)*2*PI));
+
+
+
+HER0qtf:=(a2*cos(hn2*(0/10)*2*PI))+(b2*sin(hn2*(0/10)*2*PI));
+
+HER1qtf:=(a2*cos(hn2*(1/10)*2*PI))+(b2*sin(hn2*(1/10)*2*PI));
+
+HER2qtf:=(a2*cos(hn2*(2/10)*2*PI))+(b2*sin(hn2*(2/10)*2*PI));
+
+HER3qtf:=(a2*cos(hn2*(3/10)*2*PI))+(b2*sin(hn2*(3/10)*2*PI));
+
+HER4qtf:=(a2*cos(hn2*(4/10)*2*PI))+(b2*sin(hn2*(4/10)*2*PI));
+
+HER5qtf:=(a2*cos(hn2*(5/10)*2*PI))+(b2*sin(hn2*(5/10)*2*PI));
+
+HER6qtf:=(a2*cos(hn2*(6/10)*2*PI))+(b2*sin(hn2*(6/10)*2*PI));
+
+HER7qtf:=(a2*cos(hn2*(7/10)*2*PI))+(b2*sin(hn2*(7/10)*2*PI));
+
+HER8qtf:=(a2*cos(hn2*(8/10)*2*PI))+(b2*sin(hn2*(8/10)*2*PI));
+
+HER9qtf:=(a2*cos(hn2*(9/10)*2*PI))+(b2*sin(hn2*(9/10)*2*PI));
+
+//lat3ud file in madx format
+
+
+
+synchrotron: sequence, refer=exit, l=163.36282;
+
+
+
+    // ------------- sp0 ---------------
+
+    spnum=0.0;
+
+
+
+    sp0_datum   : marker,at=0.0+(spnum*16.336282);
+
+    sp0_dipfr8  : dipfr8,at=0.16+(spnum*16.336282);
+
+    sp0_dipfr9  : dipfr9,at=0.36+(spnum*16.336282);
+
+    sp0_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+
+
+    sp0_R0HD1   : R0HD1,at=0.525+(spnum*16.336282);
+
+    sp0_R0HM1   : R0HM1,at=0.7305+(spnum*16.336282);
+
+    sp0_R0VM1   : R0VM1,at=2.218+(spnum*16.336282);
+
+    sp0_R0VD1   : R0VD1,at=2.425+(spnum*16.336282);
+
+   
+
+    sp0_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+
+    sp0_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+
+    sp0_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+
+    sp0_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+
+    sp0_qd      : qd   ,at=3.66960+(spnum*16.336282);
+
+    sp0_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+
+    sp0_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+
+    sp0_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+
+    sp0_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);                  
+
+
+
+    sp0_qtd     : R0qtd,at=4.28525+(spnum*16.336282);
+
+
+
+    sp0_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+
+    sp0_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+
+    sp0_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+
+    sp0_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+
+    sp0_qf      : qf   ,at=5.09810+(spnum*16.336282);
+
+    sp0_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+
+    sp0_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+
+    sp0_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+
+    sp0_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+
+
+    sp0_qtf     : R0qtf,at=5.71280+(spnum*16.336282);
+
+
+
+    sp0_R0HM2   : R0HM2,at=5.971+(spnum*16.336282);    
+
+    
+
+    // Default reference point for MAD-X is the centre of the element
+
+    // thus the 'AT' refers to the centre of the element
+
+    
+
+    // Injection dipoles as RBends
+
+    sp0_idip1   : idip1, at=6.589+0.25+(spnum*16.336282);
+
+    sp0_idip2   : idip2, at=8.089+0.25+(spnum*16.336282);    
+
+    // Injection dipoles as kickers for matching
+
+    // sp0_idip1   : idip1, at=6.589-0.25+(spnum*16.336282);
+
+    // sp0_idip2   : idip2, at=8.089-0.25+(spnum*16.336282);
+
+
+
+    sp0_FOIL    : FOIL,at=8.509+(spnum*16.336282);
+
+    
+
+    // Injection dipoles as RBends
+
+    // Note fudge of + 8cm in IDIP3 position to stop negative drift bug
+
+    sp0_idip3   : idip3, at=8.929+0.25+(spnum*16.336282);
+
+    sp0_idip4   : idip4, at=10.429+0.25+(spnum*16.336282);
+
+    // Injection dipoles as kickers for matching
+
+    // sp0_idip3   : idip3, at=8.929-0.25+(spnum*16.336282);
+
+    // sp0_idip4   : idip4, at=10.429-0.25+(spnum*16.336282);
+
+    
+
+    sp0_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+
+    sp0_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+
+    sp0_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+
+    sp0_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+
+    sp0_qds     : qds   ,at=11.3597+(spnum*16.336282);
+
+    sp0_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+
+    sp0_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+
+    sp0_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+
+    sp0_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+
+
+    sp0_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+
+    sp0_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+
+    sp0_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+
+    sp0_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+
+    sp0_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+
+    sp0_dip1    : dip1,at=12.236282+(spnum*16.336282);
+
+    sp0_dip2    : dip2,at=13.236282+(spnum*16.336282);
+
+    sp0_dip3    : dip3,at=14.236282+(spnum*16.336282);
+
+    sp0_dip4    : dip4,at=15.236282+(spnum*16.336282);
+
+    sp0_dip5    : dip5,at=16.036282+(spnum*16.336282);
+
+    sp0_dip6    : dip6,at=16.096282+(spnum*16.336282);
+
+    sp0_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+
+    sp0_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+
+
+    sp0_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+
+
+
+     // ---------------------------------------------------- sp1 ---------------------------------------
+
+
+
+    spnum=1.0;
+
+++++++ info: spnum redefined
+
+
+    sp1_datum   : marker, at =0.0+(spnum*16.336282);
+
+    sp1_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+
+    sp1_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+
+    sp1_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+
+
+    ! Extraction kickers represented as markers
+
+    sp1_K1      : K1,at=0.818+(spnum*16.336282);
+
+    sp1_K2      : K2,at=1.653+(spnum*16.336282);
+
+    sp1_K3      : K3,at=2.4005+(spnum*16.336282);
+
+
+
+    sp1_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+
+    sp1_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+
+    sp1_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+
+    sp1_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+
+    sp1_qd      : qd   ,at=3.66960+(spnum*16.336282);
+
+    sp1_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+
+    sp1_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+
+    sp1_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+
+    sp1_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);                  
+
+
+
+    sp1_qtd     : R1qtd,at=4.28525+(spnum*16.336282);
+
+
+
+    sp1_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+
+    sp1_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+
+    sp1_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+
+    sp1_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+
+    sp1_qf      : qf   ,at=5.09810+(spnum*16.336282);
+
+    sp1_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+
+    sp1_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+
+    sp1_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+
+    sp1_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+
+
+    sp1_qtf     : R1qtf,at=5.71280+(spnum*16.336282);    
+
+
+
+    sp1_R1HM1   : R1HM1,at=5.949+(spnum*16.336282);
+
+    sp1_R1VM1   : R1VM1,at=6.073+(spnum*16.336282);
+
+    sp1_VCP1    : VCP1,at=6.252+(spnum*16.336282);
+
+    sp1_HCP1    : HCP1,at=6.567+(spnum*16.336282);
+
+    sp1_VCS0    : VCS0,at=7.282+(spnum*16.336282);
+
+    sp1_R1HM2   : R1HM2,at=8.080+(spnum*16.336282);
+
+    sp1_R1VM2   : R1VM2,at=8.204+(spnum*16.336282);
+
+    sp1_VCS1    : VCS1,at=8.216+(spnum*16.336282);
+
+    sp1_HCS1    : HCS1,at=8.556+(spnum*16.336282);
+
+    sp1_EXTWIRE : EXTWIRE,at=8.875+(spnum*16.336282);
+
+    sp1_SEPNI   : SEPNI,at=9.436+(spnum*16.336282);
+
+    sp1_VCS2    : VCS2,at=10.090+(spnum*16.336282);
+
+    sp1_HCS3    : HCS3,at=10.632+(spnum*16.336282);
+
+   
+
+    sp1_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+
+    sp1_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+
+    sp1_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+
+    sp1_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+
+    sp1_qds     : qds   ,at=11.3597+(spnum*16.336282);
+
+    sp1_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+
+    sp1_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+
+    sp1_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+
+    sp1_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+   
+
+
+
+     sp1_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+
+     sp1_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+
+     sp1_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+
+     sp1_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+
+     sp1_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+
+     sp1_dip1    : dip1,at=12.236282+(spnum*16.336282);
+
+     sp1_dip2    : dip2,at=13.236282+(spnum*16.336282);
+
+     sp1_dip3    : dip3,at=14.236282+(spnum*16.336282);
+
+     sp1_dip4    : dip4,at=15.236282+(spnum*16.336282);
+
+     sp1_dip5    : dip5,at=16.036282+(spnum*16.336282);
+
+     sp1_dip6    : dip6,at=16.096282+(spnum*16.336282);
+
+     sp1_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+
+     sp1_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+     sp1_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+
+
+
+    // ---------------------- sp2 ------------------------
+
+
+
+    spnum=2.0;
+
+++++++ info: spnum redefined
+
+
+    sp2_datum   : marker, at =0.0+(spnum*16.336282);
+
+    sp2_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+
+    sp2_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+
+    sp2_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+
+
+    sp2_R2HM1   : R2HM1,at=0.7305+(spnum*16.336282);
+
+    sp2_R2VM1   : R2VM1,at=2.218+(spnum*16.336282);
+
+    sp2_R2VD1   : R2VD1,at=2.425+(spnum*16.336282);
+
+
+
+    sp2_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+
+    sp2_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+
+    sp2_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+
+    sp2_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+
+    sp2_qd      : qd   ,at=3.66960+(spnum*16.336282);
+
+    sp2_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+
+    sp2_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+
+    sp2_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+
+    sp2_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);                  
+
+
+
+    sp2_qtd     : R2qtd,at=4.28525+(spnum*16.336282);
+
+
+
+    sp2_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+
+    sp2_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+
+    sp2_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+
+    sp2_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+
+    sp2_qf      : qf   ,at=5.09810+(spnum*16.336282);
+
+    sp2_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+
+    sp2_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+
+    sp2_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+
+    sp2_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+
+
+    sp2_qtf     : R2qtf,at=5.71280+(spnum*16.336282);
+
+     
+
+    sp2_R2HM2   : R2HM2,at=5.971+(spnum*16.336282);
+
+    sp2_R2HD1   : R2HD1,at=6.178+(spnum*16.336282);
+
+    sp2_R2VM2   : R2VM2,at=10.7875+(spnum*16.336282);
+
+
+
+    sp2_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+
+    sp2_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+
+    sp2_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+
+    sp2_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+
+    sp2_qds     : qds   ,at=11.3597+(spnum*16.336282);
+
+    sp2_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+
+    sp2_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+
+    sp2_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+
+    sp2_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);   
+
+
+
+    sp2_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+
+    sp2_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+
+    sp2_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+
+    sp2_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+
+    sp2_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+
+    sp2_dip1    : dip1,at=12.236282+(spnum*16.336282);
+
+    sp2_dip2    : dip2,at=13.236282+(spnum*16.336282);
+
+    sp2_dip3    : dip3,at=14.236282+(spnum*16.336282);
+
+    sp2_dip4    : dip4,at=15.236282+(spnum*16.336282);
+
+    sp2_dip5    : dip5,at=16.036282+(spnum*16.336282);
+
+    sp2_dip6    : dip6,at=16.096282+(spnum*16.336282);
+
+    sp2_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+
+    sp2_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+    sp2_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+
+    // --------------------- sp3 -----------------
+
+
+
+    spnum=3.0;
+
+++++++ info: spnum redefined
+
+
+    sp3_datum   : marker, at =0.0+(spnum*16.336282);
+
+    sp3_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+
+    sp3_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+
+    sp3_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+
+
+    sp3_R3VM1   : R3VM1,at=0.7305+(spnum*16.336282);
+
+    sp3_R3VD1   : R3VD1,at=1.89725+(spnum*16.336282);
+
+    sp3_R3VM2   : R3VM2,at=2.218+(spnum*16.336282);
+
+
+
+    sp3_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+
+    sp3_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+
+    sp3_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+
+    sp3_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+
+    sp3_qd      : qd   ,at=3.66960+(spnum*16.336282);
+
+    sp3_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+
+    sp3_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+
+    sp3_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+
+    sp3_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+
+
+    sp3_qtd     : R3qtd,at=4.28525+(spnum*16.336282);
+
+
+
+    sp3_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+
+    sp3_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+
+    sp3_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+
+    sp3_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+
+    sp3_qf      : qf   ,at=5.09810+(spnum*16.336282);
+
+    sp3_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+
+    sp3_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+
+    sp3_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+
+    sp3_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+
+
+    sp3_qtf     : R3qtf,at=5.71280+(spnum*16.336282);
+
+
+
+    sp3_R3HM1   : R3HM1,at=5.971+(spnum*16.336282);
+
+    sp3_R3HD1   : R3HD1,at=6.178+(spnum*16.336282);
+
+    sp3_R3VM3   : R3VM3,at=10.7875+(spnum*16.336282);
+
+
+
+    sp3_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+
+    sp3_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+
+    sp3_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+
+    sp3_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+
+    sp3_qds     : qds   ,at=11.3597+(spnum*16.336282);
+
+    sp3_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+
+    sp3_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+
+    sp3_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+
+    sp3_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+
+
+    sp3_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+
+    sp3_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+
+    sp3_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+
+    sp3_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+
+    sp3_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+
+    sp3_dip1    : dip1,at=12.236282+(spnum*16.336282);
+
+    sp3_dip2    : dip2,at=13.236282+(spnum*16.336282);
+
+    sp3_dip3    : dip3,at=14.236282+(spnum*16.336282);
+
+    sp3_dip4    : dip4,at=15.236282+(spnum*16.336282);
+
+    sp3_dip5    : dip5,at=16.036282+(spnum*16.336282);
+
+    sp3_dip6    : dip6,at=16.096282+(spnum*16.336282);
+
+    sp3_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+
+    sp3_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+    sp3_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+
+    // ---------------- sp4 -----------------
+
+
+
+    spnum=4.0;
+
+++++++ info: spnum redefined
+
+
+
+
+    sp4_datum   : marker, at =0.0+(spnum*16.336282);
+
+    sp4_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+
+    sp4_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+
+    sp4_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+
+
+    sp4_R4VM1   : R4VM1,at=2.218+(spnum*16.336282);
+
+
+
+    sp4_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+
+    sp4_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+
+    sp4_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+
+    sp4_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+
+    sp4_qd      : qd   ,at=3.66960+(spnum*16.336282);
+
+    sp4_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+
+    sp4_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+
+    sp4_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+
+    sp4_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+
+
+    sp4_qtd     : R4qtd,at=4.28525+(spnum*16.336282);
+
+
+
+    sp4_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+
+    sp4_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+
+    sp4_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+
+    sp4_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+
+    sp4_qf      : qf   ,at=5.09810+(spnum*16.336282);
+
+    sp4_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+
+    sp4_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+
+    sp4_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+
+    sp4_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+
+
+    sp4_qtf     : R4qtf,at=5.71280+(spnum*16.336282);
+
+
+
+    sp4_R4HM2   : R4HM2,at=5.971+(spnum*16.336282);
+
+    sp4_R4HD1   : R4HD1,at=6.178+(spnum*16.336282);
+
+    sp4_R4VD1   : R4VD1,at=10.46155+(spnum*16.336282);
+
+    sp4_R4VM2   : R4VM2,at=10.7868+(spnum*16.336282);
+
+
+
+    sp4_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+
+    sp4_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+
+    sp4_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+
+    sp4_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+
+    sp4_qds     : qds   ,at=11.3597+(spnum*16.336282);
+
+    sp4_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+
+    sp4_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+
+    sp4_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+
+    sp4_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+
+
+    sp4_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+
+    sp4_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+
+    sp4_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+
+    sp4_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+
+    sp4_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+
+    sp4_dip1    : dip1,at=12.236282+(spnum*16.336282);
+
+    sp4_dip2    : dip2,at=13.236282+(spnum*16.336282);
+
+    sp4_dip3    : dip3,at=14.236282+(spnum*16.336282);
+
+    sp4_dip4    : dip4,at=15.236282+(spnum*16.336282);
+
+    sp4_dip5    : dip5,at=16.036282+(spnum*16.336282);
+
+    sp4_dip6    : dip6,at=16.096282+(spnum*16.336282);
+
+    sp4_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+
+    sp4_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+    sp4_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+
+
+
+    // -------------------- sp5 --------------------
+
+
+
+    spnum=5.0;
+
+++++++ info: spnum redefined
+
+
+    sp5_datum   : marker, at =0.0+(spnum*16.336282);
+
+    sp5_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+
+    sp5_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+
+    sp5_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+
+
+    sp5_R5HD1   : R5HD1,at=0.525+(spnum*16.336282);
+
+    sp5_R5VM1   : R5VM1,at=2.218+(spnum*16.336282);
+
+    sp5_R5VD1   : R5VD1,at=2.425+(spnum*16.336282);
+
+
+
+    sp5_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+
+    sp5_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+
+    sp5_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+
+    sp5_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+
+    sp5_qd      : qd   ,at=3.66960+(spnum*16.336282);
+
+    sp5_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+
+    sp5_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+
+    sp5_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+
+    sp5_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+
+
+    sp5_qtd     : R5qtd,at=4.28525+(spnum*16.336282);
+
+
+
+    sp5_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+
+    sp5_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+
+    sp5_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+
+    sp5_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+
+    sp5_qf      : qf   ,at=5.09810+(spnum*16.336282);
+
+    sp5_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+
+    sp5_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+
+    sp5_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+
+    sp5_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+
+
+    sp5_qtf     : R5qtf,at=5.71280+(spnum*16.336282);
+
+
+
+    sp5_R5HM1   : R5HM1,at=5.971+(spnum*16.336282);
+
+    sp5_R5HPM1  : R5HPM1,at=6.614+(spnum*16.336282);
+
+    sp5_R5WIRE  : R5WIRE,at=6.814+(spnum*16.336282);
+
+    sp5_R5VM2   : R5VM2,at=10.2235+(spnum*16.336282);
+
+    sp5_R5HPM2  : R5HPM2,at=10.459+(spnum*16.336282);
+
+
+
+    sp5_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+
+    sp5_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+
+    sp5_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+
+    sp5_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+
+    sp5_qds     : qds   ,at=11.3597+(spnum*16.336282);
+
+    sp5_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+
+    sp5_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+
+    sp5_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+
+    sp5_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+
+
+    sp5_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+
+    sp5_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+
+    sp5_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+
+    sp5_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+
+    sp5_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+
+    sp5_dip1    : dip1,at=12.236282+(spnum*16.336282);
+
+    sp5_dip2    : dip2,at=13.236282+(spnum*16.336282);
+
+    sp5_dip3    : dip3,at=14.236282+(spnum*16.336282);
+
+    sp5_dip4    : dip4,at=15.236282+(spnum*16.336282);
+
+    sp5_dip5    : dip5,at=16.036282+(spnum*16.336282);
+
+    sp5_dip6    : dip6,at=16.096282+(spnum*16.336282);
+
+    sp5_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+
+    sp5_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+    sp5_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+
+    // -------------------------- sp6 ----------------------
+
+
+
+    spnum=6.0;
+
+++++++ info: spnum redefined
+
+
+    sp6_datum   : marker, at =0.0+(spnum*16.336282);
+
+    sp6_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+
+    sp6_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+
+    sp6_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+
+
+    sp6_R6HPM1  : R6HPM1,at=0.5315+(spnum*16.336282);
+
+    sp6_R6HM1   : R6HM1,at=0.968+(spnum*16.336282);
+
+    sp6_R6VM1   : R6VM1,at=2.218+(spnum*16.336282);
+
+    sp6_R6VPM1  : R6VPM1,at=2.4545+(spnum*16.336282);
+
+
+
+    sp6_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+
+    sp6_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+
+    sp6_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+
+    sp6_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+
+    sp6_qd      : qd   ,at=3.66960+(spnum*16.336282);
+
+    sp6_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+
+    sp6_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+
+    sp6_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+
+    sp6_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+
+
+    sp6_qtd     : R6qtd,at=4.28525+(spnum*16.336282);
+
+
+
+    sp6_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+
+    sp6_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+
+    sp6_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+
+    sp6_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+
+    sp6_qf      : qf   ,at=5.09810+(spnum*16.336282);
+
+    sp6_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+
+    sp6_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+
+    sp6_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+
+    sp6_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+
+
+    sp6_qtf     : R6qtf,at=5.71280+(spnum*16.336282);
+
+
+
+    sp6_R6HM2   : R6HM2,at=5.971+(spnum*16.336282);
+
+    sp6_R6HM3   : R6HM3,at=7.255+(spnum*16.336282);
+
+    sp6_R6VM2   : R6VM2,at=7.521+(spnum*16.336282);
+
+    sp6_R6VPM2  : R6VPM2,at=10.463+(spnum*16.336282);
+
+
+
+    sp6_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+
+    sp6_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+
+    sp6_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+
+    sp6_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+
+    sp6_qds     : qds   ,at=11.3597+(spnum*16.336282);
+
+    sp6_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+
+    sp6_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+
+    sp6_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+
+    sp6_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+    
+
+    sp6_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+
+    sp6_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+
+    sp6_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+
+    sp6_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+
+    sp6_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+
+    sp6_dip1    : dip1,at=12.236282+(spnum*16.336282);
+
+    sp6_dip2    : dip2,at=13.236282+(spnum*16.336282);
+
+    sp6_dip3    : dip3,at=14.236282+(spnum*16.336282);
+
+    sp6_dip4    : dip4,at=15.236282+(spnum*16.336282);
+
+    sp6_dip5    : dip5,at=16.036282+(spnum*16.336282);
+
+    sp6_dip6    : dip6,at=16.096282+(spnum*16.336282);
+
+    sp6_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+
+    sp6_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+    sp6_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+
+    // ---------------------- sp7 -------------------------
+
+
+
+    spnum=7.0;
+
+++++++ info: spnum redefined
+
+
+    sp7_datum   : marker, at =0.0+(spnum*16.336282);
+
+    sp7_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+
+    sp7_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+
+    sp7_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+
+
+    sp7_R7HM1   : R7HM1,at=0.4376+(spnum*16.336282);
+
+    sp7_MICE    : MICE ,at=0.873+(spnum*16.336282);
+
+    sp7_R7VM2   : R7VM2,at=2.218+(spnum*16.336282);
+
+    sp7_R7VD1   : R7VD1,at=2.425+(spnum*16.336282);
+
+    
+
+    sp7_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+
+    sp7_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+
+    sp7_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+
+    sp7_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+
+    sp7_qd      : qd   ,at=3.66960+(spnum*16.336282);
+
+    sp7_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+
+    sp7_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+
+    sp7_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+
+    sp7_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+
+
+    sp7_qtd     : R7qtd,at=4.28525+(spnum*16.336282);
+
+
+
+    sp7_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+
+    sp7_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+
+    sp7_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+
+    sp7_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+
+    sp7_qf      : qf   ,at=5.09810+(spnum*16.336282);
+
+    sp7_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+
+    sp7_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+
+    sp7_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+
+    sp7_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+
+
+    sp7_qtf     : R7qtf,at=5.71280+(spnum*16.336282);
+
+
+
+    sp7_R7HM2   : R7HM2,at=5.971+(spnum*16.336282);
+
+    sp7_R7HD1   : R7HD1,at=6.178+(spnum*16.336282);
+
+    sp7_R7VM3   : R7VM3,at=10.7863+(spnum*16.336282);
+
+
+
+    sp7_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+
+    sp7_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+
+    sp7_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+
+    sp7_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+
+    sp7_qds     : qds   ,at=11.3597+(spnum*16.336282);
+
+    sp7_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+
+    sp7_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+
+    sp7_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+
+    sp7_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+
+
+    sp7_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+
+    sp7_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+
+    sp7_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+
+    sp7_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+
+    sp7_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+
+    sp7_dip1    : dip1,at=12.236282+(spnum*16.336282);
+
+    sp7_dip2    : dip2,at=13.236282+(spnum*16.336282);
+
+    sp7_dip3    : dip3,at=14.236282+(spnum*16.336282);
+
+    sp7_dip4    : dip4,at=15.236282+(spnum*16.336282);
+
+    sp7_dip5    : dip5,at=16.036282+(spnum*16.336282);
+
+    sp7_dip6    : dip6,at=16.096282+(spnum*16.336282);
+
+    sp7_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+
+    sp7_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+    sp7_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+
+    // ---------------------- sp8 -----------------------
+
+
+
+    spnum=8.0;
+
+++++++ info: spnum redefined
+
+
+    sp8_datum   : marker, at =0.0+(spnum*16.336282);
+
+    sp8_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+
+    sp8_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+
+    sp8_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+
+
+    sp8_R8VM1   : R8VM1,at=2.218+(spnum*16.336282);
+
+
+
+    sp8_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+
+    sp8_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+
+    sp8_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+
+    sp8_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+
+    sp8_qd      : qd   ,at=3.66960+(spnum*16.336282);
+
+    sp8_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+
+    sp8_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+
+    sp8_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+
+    sp8_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+
+
+    sp8_qtd     : R8qtd,at=4.28525+(spnum*16.336282);
+
+
+
+    sp8_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+
+    sp8_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+
+    sp8_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+
+    sp8_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+
+    sp8_qf      : qf   ,at=5.09810+(spnum*16.336282);
+
+    sp8_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+
+    sp8_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+
+    sp8_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+
+    sp8_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+
+
+    sp8_qtf     : R8qtf,at=5.71280+(spnum*16.336282);
+
+
+
+    sp8_R8HM2   : R8HM2,at=5.971+(spnum*16.336282);
+
+    sp8_R8VM2   : R8VM2,at=10.7863+(spnum*16.336282);
+
+
+
+    sp8_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+
+    sp8_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+
+    sp8_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+
+    sp8_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+
+    sp8_qds     : qds   ,at=11.3597+(spnum*16.336282);
+
+    sp8_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+
+    sp8_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+
+    sp8_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+
+    sp8_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+
+
+    sp8_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+
+    sp8_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+
+    sp8_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+
+    sp8_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+
+    sp8_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+
+    sp8_dip1    : dip1,at=12.236282+(spnum*16.336282);
+
+    sp8_dip2    : dip2,at=13.236282+(spnum*16.336282);
+
+    sp8_dip3    : dip3,at=14.236282+(spnum*16.336282);
+
+    sp8_dip4    : dip4,at=15.236282+(spnum*16.336282);
+
+    sp8_dip5    : dip5,at=16.036282+(spnum*16.336282);
+
+    sp8_dip6    : dip6,at=16.096282+(spnum*16.336282);
+
+    sp8_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+
+    sp8_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+    sp8_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+
+    // ------------------ sp9 -------------------------
+
+
+
+    spnum=9.0;
+
+++++++ info: spnum redefined
+
+
+
+
+
+
+    sp9_datum   : marker, at =0.0+(spnum*16.336282);
+
+    sp9_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+
+    sp9_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+
+    sp9_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);    
+
+    
+
+    sp9_R9VM2   : R9VM2,at=2.218+(spnum*16.336282);
+
+
+
+    sp9_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+
+    sp9_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+
+    sp9_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+
+    sp9_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+
+    sp9_qd      : qd   ,at=3.66960+(spnum*16.336282);
+
+    sp9_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+
+    sp9_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+
+    sp9_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+
+    sp9_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);                  
+
+
+
+    sp9_qtd     : R9qtd,at=4.28525+(spnum*16.336282);
+
+
+
+    sp9_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+
+    sp9_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+
+    sp9_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+
+    sp9_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+
+    sp9_qf      : qf   ,at=5.09810+(spnum*16.336282);
+
+    sp9_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+
+    sp9_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+
+    sp9_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+
+    sp9_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+
+
+    sp9_qtf     : R9qtf,at=5.71280+(spnum*16.336282);
+
+        
+
+    sp9_R9HM1   : R9HM1,at=5.971+(spnum*16.336282);
+
+    sp9_R9HD1   : R9HD1,at=6.178+(spnum*16.336282);
+
+    sp9_R9VD1   : R9VD1,at=10.46155+(spnum*16.336282);
+
+    sp9_R9VM3   : R9VM3,at=10.7868+(spnum*16.336282);
+
+
+
+    sp9_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+
+    sp9_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+
+    sp9_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+
+    sp9_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+
+    sp9_qds     : qds   ,at=11.3597+(spnum*16.336282);
+
+    sp9_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+
+    sp9_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+
+    sp9_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+
+    sp9_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);   
+
+
+
+    sp9_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+
+    sp9_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+
+    sp9_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+
+    sp9_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+
+    sp9_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+
+    sp9_dip1    : dip1,at=12.236282+(spnum*16.336282);
+
+    sp9_dip2    : dip2,at=13.236282+(spnum*16.336282);
+
+    sp9_dip3    : dip3,at=14.236282+(spnum*16.336282);
+
+    sp9_dip4    : dip4,at=15.236282+(spnum*16.336282);
+
+    sp9_dip5    : dip5,at=16.036282+(spnum*16.336282);
+
+    sp9_dip6    : dip6,at=16.096282+(spnum*16.336282);
+
+    sp9_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+
+    sp9_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+    sp9_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+
+endsequence;
+
+Determined SECTOR NMUL MAX :  2
+ MAD-X Beam Parameters
+                  Energy : 0.100871E+01
+          Kinetic Energy : 0.704400E-01
+      Particle Rest Mass : 0.938272E+00
+                Momentum : 0.370332E+00
+ Setting MADx with 
+     energy           1.0087120821283688     
+     method                   6
+     Num. of steps            5
+     charge           1.0000000000000000     
+  Length of machine:    163.36282000000023     
+ The machine is a RING
+ ------------------------------------ PTC Survey ------------------------------------
+ Before start:    0.0000000000000000        0.0000000000000000        0.0000000000000000     
+ Before   end:    0.0000000000000000        0.0000000000000000        0.0000000000000000     
+ After  start:    0.0000000000000000        0.0000000000000000        0.0000000000000000     
+ After    end:    2.3859304803891031E-003   0.0000000000000000        1.0541209748400664E-002
+ I am in execsript: Script name is ./PTC/resplit.ptc                               
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ $$$$$$$$$$         Write New read_ptc_command           $$$$$$$$$$
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ Selected Layout in m_u           1   called  ---> No name assigned                                                                                                        
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  
+                        2 SELECTLAYOUT
+  
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ Selected Layout in m_u           1   called  ---> No name assigned                                                                                                        
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  
+                        4 LIMIT FOR CUTTING
+  
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ limit_int0 =           4          18
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  
+                        6 LMAX
+  
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ LMAX FOR SPACE CHARGE =  0.50000000000000000     
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  
+                        8 FUZZYLMAX
+  
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ FUZZY LMAX FOR SPACE CHARGE =  0.50000000000000000       0.55000000000000004     
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  
+                       10 CUTTING ALGORITHM
+  
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  CUTTING EVERYTHING USING LMAX
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  
+                       13 THINLENS
+  
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ THIN LENS FACTOR =   1.0000000000000000E-002
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  
+                       14 return
+  
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  Exiting Command File ./PTC/resplit.ptc
+ Exiting execscript
+ I am in execsript: Script name is ./PTC/print_flat_file.ptc                       
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ $$$$$$$$$$         Write New read_ptc_command           $$$$$$$$$$
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  
+                        2 SELECTLAYOUT
+  
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ Selected Layout in m_u           1   called  ---> No name assigned                                                                                                        
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+++++++ table: ptc_twiss_summary
+
+            length            alpha_c          alpha_c_p         alpha_c_p2 
+         163.36282      0.03891368584           -1000000           -1000000 
+
+        alpha_c_p3              eta_c           gamma_tr                 q1 
+          -1000000      -0.8262995382        5.069309599       0.3101023268 
+
+                q2                dq1                dq2                 qs 
+       0.830124436       -13.01308224       -13.35471447                  0 
+
+        beta_x_min         beta_x_max         beta_y_min         beta_y_max 
+       2.145668558        17.81297896        4.025913762         16.6273922 
+
+         beta11min          beta11max          beta12min          beta12max 
+       2.145668558        17.81297896                  0                  0 
+
+         beta13min          beta13max          beta21min          beta21max 
+                 0                  0                  0                  0 
+
+         beta22min          beta22max          beta23min          beta23max 
+       4.025913762         16.6273922                  0                  0 
+
+         beta31min          beta31max          beta32min          beta32max 
+                 0                  0                  0                  0 
+
+         beta33min          beta33max           disp1min           disp1max 
+                 0                  0                  0        8.847524664 
+
+          disp2min           disp2max           disp3min           disp3max 
+      -1.029507075         2.92235459                  0                  0 
+
+          disp4min           disp4max             deltap            orbit_x 
+                 0                  0                  0     2.91511334e-14 
+
+          orbit_px            orbit_y           orbit_py           orbit_pt 
+   1.647457321e-14                  0                  0                  0 
+
+           orbit_t             xcorms             ycorms            pxcorms 
+                 0    6.804742528e-14                  0    2.032866128e-14 
+
+           pycorms             tcorms            ptcorms             xcomax 
+                 0                  0                  0    1.566008022e-13 
+
+            ycomax            pxcomax            pycomax             tcomax 
+                 0    6.032408138e-14                  0                 -0 
+
+           ptcomax             xcomin             ycomin            pxcomin 
+                 0   -5.684341886e-14                  0   -8.510885172e-15 
+
+           pycomin             tcomin            ptcomin 
+                 0                 -0                  0 
+enter Twiss module
+
+++++++ table: summ
+
+      length       orbit5         alfa      gammatr 
+163.362820000000 -0.000000000000 0.038913615055 5.069314209650 
+
+          q1          dq1      betxmax        dxmax 
+4.310106719872 -13.013519154831 17.813144305001 8.847604139016 
+
+       dxrms       xcomax       xcorms           q2 
+5.380560163084 0.000000000000 0.000000000000 3.829998069091 
+
+         dq2      betymax        dymax        dyrms 
+-13.354878414099 16.628170330735 0.000000000000 0.000000000000 
+
+      ycomax       ycorms       deltap      synch_1 
+0.000000000000 0.000000000000 0.000000000000 0.000000000000 
+
+     synch_2      synch_3      synch_4      synch_5 
+0.000000000000 0.000000000000 0.000000000000 0.000000000000 
+
+     synch_6      synch_8       nflips 
+0.000000000000 0.000000000000 0.000000000000 

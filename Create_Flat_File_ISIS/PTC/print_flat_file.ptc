@@ -1,0 +1,10 @@
+! Select the PTC layout
+SELECTLAYOUT
+1
+! maximum distance between ORBIT nodes
+LMAX
+0.5
+! create PTC flat file with given filename
+PRINT FLAT FILE
+PTC-PyORBIT_flat_file.flt
+return

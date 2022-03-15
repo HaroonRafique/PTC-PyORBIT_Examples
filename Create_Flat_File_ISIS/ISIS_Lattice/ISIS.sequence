@@ -1,0 +1,702 @@
+//lat3ud file in madx format
+
+synchrotron: sequence, refer=exit, l=163.36282;
+
+    // ------------- sp0 ---------------
+    spnum=0.0;
+
+    sp0_datum   : marker,at=0.0+(spnum*16.336282);
+    sp0_dipfr8  : dipfr8,at=0.16+(spnum*16.336282);
+    sp0_dipfr9  : dipfr9,at=0.36+(spnum*16.336282);
+    sp0_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+    sp0_R0HD1   : R0HD1,at=0.525+(spnum*16.336282);
+    sp0_R0HM1   : R0HM1,at=0.7305+(spnum*16.336282);
+    sp0_R0VM1   : R0VM1,at=2.218+(spnum*16.336282);
+    sp0_R0VD1   : R0VD1,at=2.425+(spnum*16.336282);
+   
+    sp0_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+    sp0_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+    sp0_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+    sp0_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+    sp0_qd      : qd   ,at=3.66960+(spnum*16.336282);
+    sp0_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+    sp0_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+    sp0_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+    sp0_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);                  
+
+    sp0_qtd     : R0qtd,at=4.28525+(spnum*16.336282);
+
+    sp0_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+    sp0_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+    sp0_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+    sp0_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+    sp0_qf      : qf   ,at=5.09810+(spnum*16.336282);
+    sp0_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+    sp0_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+    sp0_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+    sp0_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+    sp0_qtf     : R0qtf,at=5.71280+(spnum*16.336282);
+
+    sp0_R0HM2   : R0HM2,at=5.971+(spnum*16.336282);    
+    
+    // Default reference point for MAD-X is the centre of the element
+    // thus the 'AT' refers to the centre of the element
+    
+    // Injection dipoles as RBends
+    sp0_idip1   : idip1, at=6.589+0.25+(spnum*16.336282);
+    sp0_idip2   : idip2, at=8.089+0.25+(spnum*16.336282);    
+    // Injection dipoles as kickers for matching
+    // sp0_idip1   : idip1, at=6.589-0.25+(spnum*16.336282);
+    // sp0_idip2   : idip2, at=8.089-0.25+(spnum*16.336282);
+
+    sp0_FOIL    : FOIL,at=8.509+(spnum*16.336282);
+    
+    // Injection dipoles as RBends
+    // Note fudge of + 8cm in IDIP3 position to stop negative drift bug
+    sp0_idip3   : idip3, at=8.929+0.25+(spnum*16.336282);
+    sp0_idip4   : idip4, at=10.429+0.25+(spnum*16.336282);
+    // Injection dipoles as kickers for matching
+    // sp0_idip3   : idip3, at=8.929-0.25+(spnum*16.336282);
+    // sp0_idip4   : idip4, at=10.429-0.25+(spnum*16.336282);
+    
+    sp0_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+    sp0_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+    sp0_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+    sp0_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+    sp0_qds     : qds   ,at=11.3597+(spnum*16.336282);
+    sp0_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+    sp0_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+    sp0_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+    sp0_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+    sp0_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+    sp0_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+    sp0_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+    sp0_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+    sp0_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+    sp0_dip1    : dip1,at=12.236282+(spnum*16.336282);
+    sp0_dip2    : dip2,at=13.236282+(spnum*16.336282);
+    sp0_dip3    : dip3,at=14.236282+(spnum*16.336282);
+    sp0_dip4    : dip4,at=15.236282+(spnum*16.336282);
+    sp0_dip5    : dip5,at=16.036282+(spnum*16.336282);
+    sp0_dip6    : dip6,at=16.096282+(spnum*16.336282);
+    sp0_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+    sp0_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+
+    sp0_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+     // ---------------------------------------------------- sp1 ---------------------------------------
+
+    spnum=1.0;
+
+    sp1_datum   : marker, at =0.0+(spnum*16.336282);
+    sp1_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+    sp1_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+    sp1_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+    ! Extraction kickers represented as markers
+    sp1_K1      : K1,at=0.818+(spnum*16.336282);
+    sp1_K2      : K2,at=1.653+(spnum*16.336282);
+    sp1_K3      : K3,at=2.4005+(spnum*16.336282);
+
+    sp1_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+    sp1_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+    sp1_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+    sp1_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+    sp1_qd      : qd   ,at=3.66960+(spnum*16.336282);
+    sp1_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+    sp1_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+    sp1_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+    sp1_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);                  
+
+    sp1_qtd     : R1qtd,at=4.28525+(spnum*16.336282);
+
+    sp1_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+    sp1_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+    sp1_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+    sp1_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+    sp1_qf      : qf   ,at=5.09810+(spnum*16.336282);
+    sp1_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+    sp1_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+    sp1_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+    sp1_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+    sp1_qtf     : R1qtf,at=5.71280+(spnum*16.336282);    
+
+    sp1_R1HM1   : R1HM1,at=5.949+(spnum*16.336282);
+    sp1_R1VM1   : R1VM1,at=6.073+(spnum*16.336282);
+    sp1_VCP1    : VCP1,at=6.252+(spnum*16.336282);
+    sp1_HCP1    : HCP1,at=6.567+(spnum*16.336282);
+    sp1_VCS0    : VCS0,at=7.282+(spnum*16.336282);
+    sp1_R1HM2   : R1HM2,at=8.080+(spnum*16.336282);
+    sp1_R1VM2   : R1VM2,at=8.204+(spnum*16.336282);
+    sp1_VCS1    : VCS1,at=8.216+(spnum*16.336282);
+    sp1_HCS1    : HCS1,at=8.556+(spnum*16.336282);
+    sp1_EXTWIRE : EXTWIRE,at=8.875+(spnum*16.336282);
+    sp1_SEPNI   : SEPNI,at=9.436+(spnum*16.336282);
+    sp1_VCS2    : VCS2,at=10.090+(spnum*16.336282);
+    sp1_HCS3    : HCS3,at=10.632+(spnum*16.336282);
+   
+    sp1_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+    sp1_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+    sp1_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+    sp1_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+    sp1_qds     : qds   ,at=11.3597+(spnum*16.336282);
+    sp1_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+    sp1_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+    sp1_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+    sp1_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+   
+
+     sp1_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+     sp1_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+     sp1_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+     sp1_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+     sp1_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+     sp1_dip1    : dip1,at=12.236282+(spnum*16.336282);
+     sp1_dip2    : dip2,at=13.236282+(spnum*16.336282);
+     sp1_dip3    : dip3,at=14.236282+(spnum*16.336282);
+     sp1_dip4    : dip4,at=15.236282+(spnum*16.336282);
+     sp1_dip5    : dip5,at=16.036282+(spnum*16.336282);
+     sp1_dip6    : dip6,at=16.096282+(spnum*16.336282);
+     sp1_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+     sp1_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+     sp1_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+    // ---------------------- sp2 ------------------------
+
+    spnum=2.0;
+
+    sp2_datum   : marker, at =0.0+(spnum*16.336282);
+    sp2_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+    sp2_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+    sp2_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+    sp2_R2HM1   : R2HM1,at=0.7305+(spnum*16.336282);
+    sp2_R2VM1   : R2VM1,at=2.218+(spnum*16.336282);
+    sp2_R2VD1   : R2VD1,at=2.425+(spnum*16.336282);
+
+    sp2_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+    sp2_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+    sp2_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+    sp2_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+    sp2_qd      : qd   ,at=3.66960+(spnum*16.336282);
+    sp2_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+    sp2_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+    sp2_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+    sp2_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);                  
+
+    sp2_qtd     : R2qtd,at=4.28525+(spnum*16.336282);
+
+    sp2_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+    sp2_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+    sp2_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+    sp2_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+    sp2_qf      : qf   ,at=5.09810+(spnum*16.336282);
+    sp2_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+    sp2_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+    sp2_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+    sp2_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+    sp2_qtf     : R2qtf,at=5.71280+(spnum*16.336282);
+     
+    sp2_R2HM2   : R2HM2,at=5.971+(spnum*16.336282);
+    sp2_R2HD1   : R2HD1,at=6.178+(spnum*16.336282);
+    sp2_R2VM2   : R2VM2,at=10.7875+(spnum*16.336282);
+
+    sp2_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+    sp2_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+    sp2_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+    sp2_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+    sp2_qds     : qds   ,at=11.3597+(spnum*16.336282);
+    sp2_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+    sp2_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+    sp2_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+    sp2_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);   
+
+    sp2_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+    sp2_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+    sp2_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+    sp2_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+    sp2_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+    sp2_dip1    : dip1,at=12.236282+(spnum*16.336282);
+    sp2_dip2    : dip2,at=13.236282+(spnum*16.336282);
+    sp2_dip3    : dip3,at=14.236282+(spnum*16.336282);
+    sp2_dip4    : dip4,at=15.236282+(spnum*16.336282);
+    sp2_dip5    : dip5,at=16.036282+(spnum*16.336282);
+    sp2_dip6    : dip6,at=16.096282+(spnum*16.336282);
+    sp2_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+    sp2_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+    sp2_end     : marker, at =16.336282+(spnum*16.336282);
+
+    // --------------------- sp3 -----------------
+
+    spnum=3.0;
+
+    sp3_datum   : marker, at =0.0+(spnum*16.336282);
+    sp3_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+    sp3_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+    sp3_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+    sp3_R3VM1   : R3VM1,at=0.7305+(spnum*16.336282);
+    sp3_R3VD1   : R3VD1,at=1.89725+(spnum*16.336282);
+    sp3_R3VM2   : R3VM2,at=2.218+(spnum*16.336282);
+
+    sp3_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+    sp3_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+    sp3_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+    sp3_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+    sp3_qd      : qd   ,at=3.66960+(spnum*16.336282);
+    sp3_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+    sp3_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+    sp3_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+    sp3_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+    sp3_qtd     : R3qtd,at=4.28525+(spnum*16.336282);
+
+    sp3_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+    sp3_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+    sp3_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+    sp3_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+    sp3_qf      : qf   ,at=5.09810+(spnum*16.336282);
+    sp3_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+    sp3_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+    sp3_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+    sp3_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+    sp3_qtf     : R3qtf,at=5.71280+(spnum*16.336282);
+
+    sp3_R3HM1   : R3HM1,at=5.971+(spnum*16.336282);
+    sp3_R3HD1   : R3HD1,at=6.178+(spnum*16.336282);
+    sp3_R3VM3   : R3VM3,at=10.7875+(spnum*16.336282);
+
+    sp3_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+    sp3_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+    sp3_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+    sp3_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+    sp3_qds     : qds   ,at=11.3597+(spnum*16.336282);
+    sp3_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+    sp3_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+    sp3_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+    sp3_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+    sp3_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+    sp3_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+    sp3_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+    sp3_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+    sp3_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+    sp3_dip1    : dip1,at=12.236282+(spnum*16.336282);
+    sp3_dip2    : dip2,at=13.236282+(spnum*16.336282);
+    sp3_dip3    : dip3,at=14.236282+(spnum*16.336282);
+    sp3_dip4    : dip4,at=15.236282+(spnum*16.336282);
+    sp3_dip5    : dip5,at=16.036282+(spnum*16.336282);
+    sp3_dip6    : dip6,at=16.096282+(spnum*16.336282);
+    sp3_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+    sp3_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+    sp3_end     : marker, at =16.336282+(spnum*16.336282);
+
+    // ---------------- sp4 -----------------
+
+    spnum=4.0;
+
+
+    sp4_datum   : marker, at =0.0+(spnum*16.336282);
+    sp4_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+    sp4_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+    sp4_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+    sp4_R4VM1   : R4VM1,at=2.218+(spnum*16.336282);
+
+    sp4_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+    sp4_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+    sp4_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+    sp4_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+    sp4_qd      : qd   ,at=3.66960+(spnum*16.336282);
+    sp4_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+    sp4_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+    sp4_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+    sp4_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+    sp4_qtd     : R4qtd,at=4.28525+(spnum*16.336282);
+
+    sp4_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+    sp4_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+    sp4_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+    sp4_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+    sp4_qf      : qf   ,at=5.09810+(spnum*16.336282);
+    sp4_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+    sp4_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+    sp4_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+    sp4_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+    sp4_qtf     : R4qtf,at=5.71280+(spnum*16.336282);
+
+    sp4_R4HM2   : R4HM2,at=5.971+(spnum*16.336282);
+    sp4_R4HD1   : R4HD1,at=6.178+(spnum*16.336282);
+    sp4_R4VD1   : R4VD1,at=10.46155+(spnum*16.336282);
+    sp4_R4VM2   : R4VM2,at=10.7868+(spnum*16.336282);
+
+    sp4_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+    sp4_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+    sp4_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+    sp4_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+    sp4_qds     : qds   ,at=11.3597+(spnum*16.336282);
+    sp4_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+    sp4_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+    sp4_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+    sp4_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+    sp4_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+    sp4_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+    sp4_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+    sp4_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+    sp4_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+    sp4_dip1    : dip1,at=12.236282+(spnum*16.336282);
+    sp4_dip2    : dip2,at=13.236282+(spnum*16.336282);
+    sp4_dip3    : dip3,at=14.236282+(spnum*16.336282);
+    sp4_dip4    : dip4,at=15.236282+(spnum*16.336282);
+    sp4_dip5    : dip5,at=16.036282+(spnum*16.336282);
+    sp4_dip6    : dip6,at=16.096282+(spnum*16.336282);
+    sp4_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+    sp4_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+    sp4_end     : marker, at =16.336282+(spnum*16.336282);
+
+
+    // -------------------- sp5 --------------------
+
+    spnum=5.0;
+
+    sp5_datum   : marker, at =0.0+(spnum*16.336282);
+    sp5_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+    sp5_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+    sp5_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+    sp5_R5HD1   : R5HD1,at=0.525+(spnum*16.336282);
+    sp5_R5VM1   : R5VM1,at=2.218+(spnum*16.336282);
+    sp5_R5VD1   : R5VD1,at=2.425+(spnum*16.336282);
+
+    sp5_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+    sp5_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+    sp5_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+    sp5_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+    sp5_qd      : qd   ,at=3.66960+(spnum*16.336282);
+    sp5_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+    sp5_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+    sp5_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+    sp5_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+    sp5_qtd     : R5qtd,at=4.28525+(spnum*16.336282);
+
+    sp5_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+    sp5_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+    sp5_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+    sp5_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+    sp5_qf      : qf   ,at=5.09810+(spnum*16.336282);
+    sp5_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+    sp5_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+    sp5_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+    sp5_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+    sp5_qtf     : R5qtf,at=5.71280+(spnum*16.336282);
+
+    sp5_R5HM1   : R5HM1,at=5.971+(spnum*16.336282);
+    sp5_R5HPM1  : R5HPM1,at=6.614+(spnum*16.336282);
+    sp5_R5WIRE  : R5WIRE,at=6.814+(spnum*16.336282);
+    sp5_R5VM2   : R5VM2,at=10.2235+(spnum*16.336282);
+    sp5_R5HPM2  : R5HPM2,at=10.459+(spnum*16.336282);
+
+    sp5_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+    sp5_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+    sp5_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+    sp5_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+    sp5_qds     : qds   ,at=11.3597+(spnum*16.336282);
+    sp5_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+    sp5_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+    sp5_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+    sp5_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+    sp5_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+    sp5_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+    sp5_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+    sp5_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+    sp5_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+    sp5_dip1    : dip1,at=12.236282+(spnum*16.336282);
+    sp5_dip2    : dip2,at=13.236282+(spnum*16.336282);
+    sp5_dip3    : dip3,at=14.236282+(spnum*16.336282);
+    sp5_dip4    : dip4,at=15.236282+(spnum*16.336282);
+    sp5_dip5    : dip5,at=16.036282+(spnum*16.336282);
+    sp5_dip6    : dip6,at=16.096282+(spnum*16.336282);
+    sp5_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+    sp5_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+    sp5_end     : marker, at =16.336282+(spnum*16.336282);
+
+    // -------------------------- sp6 ----------------------
+
+    spnum=6.0;
+
+    sp6_datum   : marker, at =0.0+(spnum*16.336282);
+    sp6_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+    sp6_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+    sp6_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+    sp6_R6HPM1  : R6HPM1,at=0.5315+(spnum*16.336282);
+    sp6_R6HM1   : R6HM1,at=0.968+(spnum*16.336282);
+    sp6_R6VM1   : R6VM1,at=2.218+(spnum*16.336282);
+    sp6_R6VPM1  : R6VPM1,at=2.4545+(spnum*16.336282);
+
+    sp6_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+    sp6_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+    sp6_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+    sp6_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+    sp6_qd      : qd   ,at=3.66960+(spnum*16.336282);
+    sp6_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+    sp6_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+    sp6_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+    sp6_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+    sp6_qtd     : R6qtd,at=4.28525+(spnum*16.336282);
+
+    sp6_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+    sp6_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+    sp6_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+    sp6_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+    sp6_qf      : qf   ,at=5.09810+(spnum*16.336282);
+    sp6_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+    sp6_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+    sp6_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+    sp6_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+    sp6_qtf     : R6qtf,at=5.71280+(spnum*16.336282);
+
+    sp6_R6HM2   : R6HM2,at=5.971+(spnum*16.336282);
+    sp6_R6HM3   : R6HM3,at=7.255+(spnum*16.336282);
+    sp6_R6VM2   : R6VM2,at=7.521+(spnum*16.336282);
+    sp6_R6VPM2  : R6VPM2,at=10.463+(spnum*16.336282);
+
+    sp6_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+    sp6_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+    sp6_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+    sp6_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+    sp6_qds     : qds   ,at=11.3597+(spnum*16.336282);
+    sp6_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+    sp6_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+    sp6_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+    sp6_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+    
+    sp6_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+    sp6_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+    sp6_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+    sp6_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+    sp6_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+    sp6_dip1    : dip1,at=12.236282+(spnum*16.336282);
+    sp6_dip2    : dip2,at=13.236282+(spnum*16.336282);
+    sp6_dip3    : dip3,at=14.236282+(spnum*16.336282);
+    sp6_dip4    : dip4,at=15.236282+(spnum*16.336282);
+    sp6_dip5    : dip5,at=16.036282+(spnum*16.336282);
+    sp6_dip6    : dip6,at=16.096282+(spnum*16.336282);
+    sp6_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+    sp6_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+    sp6_end     : marker, at =16.336282+(spnum*16.336282);
+
+    // ---------------------- sp7 -------------------------
+
+    spnum=7.0;
+
+    sp7_datum   : marker, at =0.0+(spnum*16.336282);
+    sp7_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+    sp7_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+    sp7_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+    sp7_R7HM1   : R7HM1,at=0.4376+(spnum*16.336282);
+    sp7_MICE    : MICE ,at=0.873+(spnum*16.336282);
+    sp7_R7VM2   : R7VM2,at=2.218+(spnum*16.336282);
+    sp7_R7VD1   : R7VD1,at=2.425+(spnum*16.336282);
+    
+    sp7_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+    sp7_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+    sp7_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+    sp7_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+    sp7_qd      : qd   ,at=3.66960+(spnum*16.336282);
+    sp7_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+    sp7_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+    sp7_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+    sp7_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+    sp7_qtd     : R7qtd,at=4.28525+(spnum*16.336282);
+
+    sp7_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+    sp7_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+    sp7_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+    sp7_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+    sp7_qf      : qf   ,at=5.09810+(spnum*16.336282);
+    sp7_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+    sp7_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+    sp7_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+    sp7_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+    sp7_qtf     : R7qtf,at=5.71280+(spnum*16.336282);
+
+    sp7_R7HM2   : R7HM2,at=5.971+(spnum*16.336282);
+    sp7_R7HD1   : R7HD1,at=6.178+(spnum*16.336282);
+    sp7_R7VM3   : R7VM3,at=10.7863+(spnum*16.336282);
+
+    sp7_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+    sp7_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+    sp7_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+    sp7_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+    sp7_qds     : qds   ,at=11.3597+(spnum*16.336282);
+    sp7_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+    sp7_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+    sp7_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+    sp7_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+    sp7_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+    sp7_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+    sp7_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+    sp7_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+    sp7_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+    sp7_dip1    : dip1,at=12.236282+(spnum*16.336282);
+    sp7_dip2    : dip2,at=13.236282+(spnum*16.336282);
+    sp7_dip3    : dip3,at=14.236282+(spnum*16.336282);
+    sp7_dip4    : dip4,at=15.236282+(spnum*16.336282);
+    sp7_dip5    : dip5,at=16.036282+(spnum*16.336282);
+    sp7_dip6    : dip6,at=16.096282+(spnum*16.336282);
+    sp7_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+    sp7_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+    sp7_end     : marker, at =16.336282+(spnum*16.336282);
+
+    // ---------------------- sp8 -----------------------
+
+    spnum=8.0;
+
+    sp8_datum   : marker, at =0.0+(spnum*16.336282);
+    sp8_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+    sp8_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+    sp8_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);
+
+    sp8_R8VM1   : R8VM1,at=2.218+(spnum*16.336282);
+
+    sp8_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+    sp8_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+    sp8_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+    sp8_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+    sp8_qd      : qd   ,at=3.66960+(spnum*16.336282);
+    sp8_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+    sp8_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+    sp8_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+    sp8_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);              
+
+    sp8_qtd     : R8qtd,at=4.28525+(spnum*16.336282);
+
+    sp8_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+    sp8_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+    sp8_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+    sp8_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+    sp8_qf      : qf   ,at=5.09810+(spnum*16.336282);
+    sp8_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+    sp8_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+    sp8_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+    sp8_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+    sp8_qtf     : R8qtf,at=5.71280+(spnum*16.336282);
+
+    sp8_R8HM2   : R8HM2,at=5.971+(spnum*16.336282);
+    sp8_R8VM2   : R8VM2,at=10.7863+(spnum*16.336282);
+
+    sp8_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+    sp8_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+    sp8_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+    sp8_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+    sp8_qds     : qds   ,at=11.3597+(spnum*16.336282);
+    sp8_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+    sp8_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+    sp8_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+    sp8_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);
+
+    sp8_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+    sp8_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+    sp8_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+    sp8_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+    sp8_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+    sp8_dip1    : dip1,at=12.236282+(spnum*16.336282);
+    sp8_dip2    : dip2,at=13.236282+(spnum*16.336282);
+    sp8_dip3    : dip3,at=14.236282+(spnum*16.336282);
+    sp8_dip4    : dip4,at=15.236282+(spnum*16.336282);
+    sp8_dip5    : dip5,at=16.036282+(spnum*16.336282);
+    sp8_dip6    : dip6,at=16.096282+(spnum*16.336282);
+    sp8_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+    sp8_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+    sp8_end     : marker, at =16.336282+(spnum*16.336282);
+
+    // ------------------ sp9 -------------------------
+
+    spnum=9.0;
+
+
+
+    sp9_datum   : marker, at =0.0+(spnum*16.336282);
+    sp9_dipfr8  : dipfr8, at = 0.16+(spnum*16.336282);
+    sp9_dipfr9  : dipfr9, at =0.36+(spnum*16.336282);
+    sp9_dipfr10 : dipfr10,at=0.39+(spnum*16.336282);    
+    
+    sp9_R9VM2   : R9VM2,at=2.218+(spnum*16.336282);
+
+    sp9_qdfr1   : qdfr1,at=2.99215+(spnum*16.336282);
+    sp9_qdfr2   : qdfr2,at=3.04490+(spnum*16.336282);
+    sp9_qdfr3   : qdfr3,at=3.09765+(spnum*16.336282);
+    sp9_qdfr4   : qdfr4,at=3.15040+(spnum*16.336282);
+    sp9_qd      : qd   ,at=3.66960+(spnum*16.336282);
+    sp9_qdfr5   : qdfr5,at=3.72235+(spnum*16.336282);
+    sp9_qdfr6   : qdfr6,at=3.77510+(spnum*16.336282);
+    sp9_qdfr7   : qdfr7,at=3.82785+(spnum*16.336282);
+    sp9_qdfr8   : qdfr8,at=3.88060+(spnum*16.336282);                  
+
+    sp9_qtd     : R9qtd,at=4.28525+(spnum*16.336282);
+
+    sp9_qffr1   : qffr1,at=4.43565+(spnum*16.336282);
+    sp9_qffr2   : qffr2,at=4.48840+(spnum*16.336282);
+    sp9_qffr3   : qffr3,at=4.54115+(spnum*16.336282);
+    sp9_qffr4   : qffr4,at=4.59390+(spnum*16.336282);
+    sp9_qf      : qf   ,at=5.09810+(spnum*16.336282);
+    sp9_qffr5   : qffr5,at=5.15085+(spnum*16.336282);
+    sp9_qffr6   : qffr6,at=5.20360+(spnum*16.336282);
+    sp9_qffr7   : qffr7,at=5.25635+(spnum*16.336282);
+    sp9_qffr8   : qffr8,at=5.30910+(spnum*16.336282);
+
+    sp9_qtf     : R9qtf,at=5.71280+(spnum*16.336282);
+        
+    sp9_R9HM1   : R9HM1,at=5.971+(spnum*16.336282);
+    sp9_R9HD1   : R9HD1,at=6.178+(spnum*16.336282);
+    sp9_R9VD1   : R9VD1,at=10.46155+(spnum*16.336282);
+    sp9_R9VM3   : R9VM3,at=10.7868+(spnum*16.336282);
+
+    sp9_qdsfr1  : qdsfr1,at=10.99605+(spnum*16.336282);
+    sp9_qdsfr2  : qdsfr2,at=11.0348+(spnum*16.336282);
+    sp9_qdsfr3  : qdsfr3,at=11.07355+(spnum*16.336282);
+    sp9_qdsfr4  : qdsfr4,at=11.1123+(spnum*16.336282);
+    sp9_qds     : qds   ,at=11.3597+(spnum*16.336282);
+    sp9_qdsfr5  : qdsfr5,at=11.39845+(spnum*16.336282);
+    sp9_qdsfr6  : qdsfr6,at=11.4372+(spnum*16.336282);
+    sp9_qdsfr7  : qdsfr7,at=11.47595+(spnum*16.336282);
+    sp9_qdsfr8  : qdsfr8,at=11.5147+(spnum*16.336282);   
+
+    sp9_dipfr1  : dipfr1,at=11.576282+(spnum*16.336282);
+    sp9_dipfr2  : dipfr2,at=11.776282+(spnum*16.336282);
+    sp9_dipfr3  : dipfr3,at=11.936282+(spnum*16.336282);
+    sp9_dipfr4  : dipfr4,at=11.976282+(spnum*16.336282);
+    sp9_dipfr5  : dipfr5,at=12.176282+(spnum*16.336282);
+    sp9_dip1    : dip1,at=12.236282+(spnum*16.336282);
+    sp9_dip2    : dip2,at=13.236282+(spnum*16.336282);
+    sp9_dip3    : dip3,at=14.236282+(spnum*16.336282);
+    sp9_dip4    : dip4,at=15.236282+(spnum*16.336282);
+    sp9_dip5    : dip5,at=16.036282+(spnum*16.336282);
+    sp9_dip6    : dip6,at=16.096282+(spnum*16.336282);
+    sp9_dipfr6  : dipfr6,at=16.296282+(spnum*16.336282);
+    sp9_dipfr7  : dipfr7,at=16.336282+(spnum*16.336282);
+    sp9_end     : marker, at =16.336282+(spnum*16.336282);
+
+endsequence;

@@ -1,0 +1,305 @@
+ptc_twiss_macro(order, dp, slice_flag): macro = {
+  select, flag=ptc_twiss, column=name,keyword,s,x,px,y,py,t,pt,beta11,alfa11,beta22,alfa22,disp1,disp,disp3,disp4,gamma11,gamma22,mu1,mu2,energy,l,angle,K0L,K0SL,K1L,K1SL,K2L,K2SL,K3L,K3SL,K4L,K4SL,K5L,K5SL,VKICK,HKICK,SLOT_ID;
+  ptc_create_universe;
+  ptc_create_layout, time=false, model=2, exact=true, method=6, nst=3;
+  IF (slice_flag == 1){
+    ptc_twiss, closed_orbit, icase=56, no=order, deltap=dp, table=ptc_twiss, summary_table=ptc_twiss_summary, slice_magnets=true;
+  }
+  ELSE{
+    ptc_twiss, closed_orbit, icase=56, no=order, deltap=dp, table=ptc_twiss, summary_table=ptc_twiss_summary, normal;
+  }
+  ptc_end;
+};
+
+write_ptc_twiss(filename) : macro = {
+  write, table=ptc_twiss, file=filename;
+};
+
+ptc_twiss_MTE_macro(order, x1, x2, slice_flag): macro = {
+  select, flag=ptc_twiss, column=name,keyword,s,x,px,y,py,t,pt,beta11,alfa11,beta22,alfa22,disp1,disp,disp3,disp4,gamma11,gamma22,mu1,mu2,energy,l,angle,K0L,K0SL,K1L,K1SL,K2L,K2SL,K3L,K3SL,K4L,K4SL,K5L,K5SL,VKICK,HKICK,SLOT_ID;
+  ptc_create_universe;
+  ptc_create_layout, time=false, model=2, method=6, nst=3, exact=true;
+  IF (slice_flag == 1){
+    ptc_twiss, closed_orbit, icase=56, no=order, table=ptc_twiss, summary_table=ptc_twiss_summary, x = x1, px = x2, slice_magnets=true;
+  }
+  ELSE{
+    ptc_twiss, closed_orbit, icase=56, no=order, table=ptc_twiss, summary_table=ptc_twiss_summary, x = x1, px = x2;
+  }
+  ptc_end;
+};
+
+write_str_file(filename): macro = {
+  assign, echo = filename;
+  print, text = "/**********************************************************************************";
+  print, text = "*                             SBENDs and MULTIPOLES in MUs";
+  print, text = "***********************************************************************************/";
+  print, text = "";
+  value, K1_F, K1_D, K2_F, K2_D, MPK2, MPK2_J, MPK3_F, MPK3_D;
+  print, text = "";
+  print, text = "/**********************************************************************************";
+  print, text = "*                                    PFW and F8L";
+  print, text = "***********************************************************************************/";
+  print, text = "";
+  value, PFWK1_F, PFWK1_D, PFWK2_F, PFWK2_D, PFWK3_F, PFWK3_D, F8LK1;
+  print, text = "";
+  print, text = "/**********************************************************************************";
+  print, text = "*                                         LEQs";
+  print, text = "***********************************************************************************/";
+  print, text = "";
+  value, KF, KD;
+  assign, echo = terminal;
+};
+
+write_MTE_str_file(filename): macro = {
+  assign, echo = filename;
+  print, text = "/**********************************************************************************";
+  print, text = "*                             SBENDs and MULTIPOLES in MUs";
+  print, text = "***********************************************************************************/";
+  print, text = "";
+  value, K1_F, K1_D, K2_F, K2_D, MPK2, MPK2_J, MPK3_F, MPK3_D;
+  print, text = "";
+  print, text = "/**********************************************************************************";
+  print, text = "*                                    PFW and F8L";
+  print, text = "***********************************************************************************/";
+  print, text = "";
+  value, PFWK1_F, PFWK1_D, PFWK2_F, PFWK2_D, PFWK3_F, PFWK3_D, F8LK1;
+  print, text = "";
+  print, text = "/**********************************************************************************";
+  print, text = "*                                         LEQs";
+  print, text = "***********************************************************************************/";
+  print, text = "";
+  value, KF, KD;
+  print, text = "";
+  print, text = "/**********************************************************************************";
+  print, text = "*                                     MTE elements";
+  print, text = "***********************************************************************************/";
+  print, text = "";
+  value, KXNO39, KXNO55, KONO39, KONO55, KODN;
+  print, text = "";
+  assign, echo = terminal;
+};
+
+! Override existing macro in macros file due to bug when using MAD-X 5.02
+ptc_twiss_macro(order): macro = {
+	select, flag=ptc_twiss, column=name,keyword,s,x,px,y,py,t,pt,beta11,alfa11,beta22,alfa22,disp1,disp2,disp3,disp4,gamma11,gamma22,mu1,mu2,energy,l,angle,K0L,K0SL,K1L,K1SL,K2L,K2SL,K3L,K3SL,K4L,K4SL,K5L,K5SL,VKICK,HKICK,SLOT_ID;
+	ptc_create_universe;
+	ptc_create_layout, time=false, model=2, exact=true, method=6, nst=3;
+	ptc_twiss, closed_orbit, icase=56, no=order, table=ptc_twiss, summary_table=ptc_twiss_summary;  
+	ptc_end;
+};
+
+ptc_twiss_tune_macro_false_split_n(nnn): macro={
+        select, flag=ptc_twiss, column=name, s, l, betx, bety, alfx, alfy, disp1, disp2, disp3, disp4, x, px, y, py, mu1, mu2;
+        ptc_create_universe;
+        ptc_create_layout, time=true, model=2, exact=true, method=6, nst=3;
+        ptc_twiss, no=map_order, closed_orbit, table = ptc_twiss, file = nnn.ptc, icase=56, summary_table=ptc_twiss_summary;
+        qx0=table(ptc_twiss_summary,q1);
+        qy0=table(ptc_twiss_summary,q2);
+        xcomax0=table(ptc_twiss_summary,xcomax);
+        xcomin0=table(ptc_twiss_summary,xcomin);
+        value, qx0, qy0;
+        ptc_end;
+};
+
+madx_twiss_file_macro(nnn): macro={
+        select, flag=twiss, clear;
+        select, flag=twiss, column=NAME, KEYWORD, S, L, BETX, BETY, ALFX, ALFY, MUX, MUY, DX, DY, X, Y;
+        set,    format="12.6f";
+        twiss,  sequence=PS, file=nnn.tfs, save;
+};
+
+match_Tunes(PFW_flag, QQx, QQy): macro={
+	IF(PFW_flag == 0){
+	print, text = "/***************************************************";
+	print, text = "  Matching Tune using Low Energy Quads";
+	print, text = "/***************************************************";
+ 	match, use_macro;
+		vary, name = kf, step=1.0E-6 ;
+		vary, name = kd, step=1.0E-6 ;
+		use_macro, name = ptc_twiss_macro(2);
+		constraint, expr = table(ptc_twiss_summary,q1)  = QQx;
+		constraint, expr = table(ptc_twiss_summary,q2)  = QQy;
+	jacobian,calls=50000,bisec=3;
+	ENDMATCH;
+	}
+	ELSEIF(PFW_flag == 1){
+	print, text = "/***************************************************";
+	print, text = "  Matching Tune using Pole Face Windings";
+	print, text = "/***************************************************";
+	match, use_macro;
+		vary, name = pfwk1_f;
+		vary, name = pfwk1_d;
+		use_macro, name = ptc_twiss_macro(2);
+		constraint, expr = table(ptc_twiss_summary,q1)  = QQx;
+		constraint, expr = table(ptc_twiss_summary,q2)  = QQy;
+	jacobian,calls=50000,bisec=3;
+	ENDMATCH;
+	}
+	value, kf, kd, pfwk1_f, pfwk1_d;
+};
+
+match_Chroma_PFW(QQxp, QQyp, QQxp2, QQyp2): macro={
+	print, text = "/***************************************************";
+	print, text = "  Matching Chromaticity using Pole Face Windings";
+	print, text = "/***************************************************";
+	match, use_macro;
+		vary, name = pfwk2_f;
+		vary, name = pfwk2_d;
+		vary, name = pfwk3_f;
+		vary, name = pfwk3_d;
+		use_macro, name = ptc_twiss_macro(2);
+		constraint, expr = table(ptc_twiss_summary,dq1) = QQxp;
+		constraint, expr = table(ptc_twiss_summary,dq2) = QQyp;
+		! These require the `normal' ptc_twiss flag which doesn't seem to work with MAD-X 5.02
+		!constraint, expr = table(nonlin,value,5)  = QQxp2;
+		!constraint, expr = table(nonlin,value,10) = QQyp2;
+	jacobian,calls=50000,bisec=3;
+	ENDMATCH;
+	value, pfwk2_f, pfwk2_d, pfwk3_f, pfwk3_d;
+};
+
+distributed_qfn_error(beta_beating): macro={
+  print, text = "/***************************************************";
+  print, text = "  Implementing distributed errors on QFN quadrupoles";
+  print, text = "/***************************************************";
+  Delta_k_new := 0.00015 * beta_beating;
+  EOPTION, ADD=false;
+  SELECT,FLAG=ERROR,CLEAR;
+  SELECT,FLAG=ERROR,PATTERN="QFN*";
+  EFCOMP, DKN:={0,Delta_k_new*tgauss(3),0}; 
+  value, Delta_k_new;
+};
+
+QDN78_error(beta_beating): macro={
+  print, text = "/***************************************************";
+  print, text = "  Implementing QDN78 error";
+  print, text = "/***************************************************";
+  !beta_0 = 22.35981157; !value @ QDN72
+  L_Q = 0.12;
+  beta_0 = 21.45106468; !value @ QDN78
+  value, beta_0;
+
+  Delta_k_unit = ( (2 * sin(twopi*tune_y) ) / (beta_0 * L_Q) );
+  value, Delta_k_unit;
+
+  !Delta_k := 1.05 * ( (2 * sin(twopi*(6+tune_y)) ) / (beta_0) );
+  !Delta_k := beta_beating * 0.013781475; !For specific MD4224 optics
+  !Delta_k_unit_old := 0.000510425; !For specific MD4224 optics
+
+  Delta_k_new := beta_beating * -Delta_k_unit;
+  value, Delta_k_new;
+
+  EOPTION, ADD=false;
+  SELECT,FLAG=ERROR,CLEAR;
+  SELECT,FLAG=ERROR,PATTERN=PR.QDN78;
+  EFCOMP, DKN:={0,Delta_k_new,0}; 
+};
+
+Apply_Injection_Bump(): macro={
+
+        xmax := table(summ, xcomax);
+        Qx := table(summ, Q1);
+        Qy := table(summ, Q2);
+        
+        BSW40 := BSW40_K0;
+        BSW42 := BSW42_K0;
+        BSW43 := BSW43_K0;
+        BSW44 := BSW44_K0;
+        BSStren : = BSS;
+
+        !BUMP_40 := 28.E-6/(BRHO); != 3.919331935e-06
+
+        K2_S40 := BSStren*(BSW40_K0/BSW42_K0);
+        K2_S42 := BSStren*(BSW42_K0/BSW42_K0);
+        K2_S43 := BSStren*(BSW43_K0/BSW42_K0);
+        K2_S44 := BSStren*(BSW44_K0/BSW42_K0);
+
+        create, table=TBSEXT40, column=BSEXT_t, BSW40, K2_S40;
+        create, table=TBSEXT42, column=BSEXT_t, BSW42, K2_S42;
+        create, table=TBSEXT43, column=BSEXT_t, BSW43, K2_S43;
+        create, table=TBSEXT44, column=BSEXT_t, BSW44, K2_S44;
+
+        /***********************************************************************
+         * Read input table
+         **********************************************************************/
+
+        readtable, file='MADX_Input/BSEXT_Bump_SBEND.tfs';
+        nrows = table(BSWTABLE, tablelength);
+        value, nrows;
+        row = 0;
+
+        /***********************************************************************
+         * Iterate over steps from input table
+         **********************************************************************/
+        EOPTION, ADD=false;        
+        while(row<nrows){ !while(row<1)
+                row = row + 1;
+                iteration = 0;
+                value, iteration;
+
+                SETVARS, TABLE=BSWTABLE, ROW=row;
+
+                option, warn;
+                option, -info;
+
+                ! Set kicker strengths as errors (with sextupole component)
+                ! N.B. if 'use' command is used after these, errors will be erased
+
+                SELECT,FLAG=ERROR,CLEAR;
+                SELECT,FLAG=ERROR,PATTERN=PI.BSW40;
+                EFCOMP, DKN:={BSW40,0,K2_S40}; 
+
+                SELECT,FLAG=ERROR,CLEAR;
+                SELECT,FLAG=ERROR,PATTERN=PI.BSW42;
+                EFCOMP, DKN:={BSW42,0,K2_S42}; 
+
+                SELECT,FLAG=ERROR,CLEAR;
+                SELECT,FLAG=ERROR,PATTERN=PI.BSW43;
+                EFCOMP, DKN:={BSW43,0,K2_S43}; 
+
+                SELECT,FLAG=ERROR,CLEAR;
+                SELECT,FLAG=ERROR,PATTERN=PI.BSW44;
+                EFCOMP, DKN:={BSW44,0,K2_S44}; 
+
+                !exec, ptc_twiss_tune_macro_false_split;
+                exec, ptc_twiss_tune_macro_false_split_n($row);
+                exec, madx_twiss_file_macro($row);
+                
+                fill, table=mytable;
+                fill, table=TBSEXT40;
+                fill, table=TBSEXT42;
+                fill, table=TBSEXT43;
+                fill, table=TBSEXT44;
+        }
+
+        !SELECT, FLAG = ERROR, FULL;
+        !ESAVE, FILE = errors.dat;
+
+        /***********************************************************************
+         * Create plot of closed orbit and tunes
+         **********************************************************************/
+
+        plot, table=mytable, haxis=BSEXT_t, vaxis=xmax;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=xcomin0;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=xcomax0;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=Qx0;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=Qy0;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=Qx;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=Qy;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=K2_S40, K2_S42, K2_S43;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=K2_S44;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=BSStren;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=BSW40, BSW44;
+        plot, table=mytable, haxis=BSEXT_t, vaxis=BSW43, BSW42, BSW40;
+
+        /***********************************************************************
+         * Write tables for magnet ramp
+         **********************************************************************/
+         
+        write, table=mytable, file='BSEXT_Out.tfs';
+        write, table=TBSEXT40, file='BSEXT40.tfs';
+        write, table=TBSEXT42, file='BSEXT42.tfs';
+        write, table=TBSEXT43, file='BSEXT43.tfs';
+        write, table=TBSEXT44, file='BSEXT44.tfs';
+
+}

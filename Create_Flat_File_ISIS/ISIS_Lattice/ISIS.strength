@@ -1,0 +1,111 @@
+//ISIS Strength File
+
+! MAIN DIPOLES (combined function)
+! --------------------------------------------------------------
+
+! Dipole components
+
+dip1_angle:=0.0085680;
+dip2_angle:=0.1428000;
+dip3_angle:=0.1428000;
+dip4_angle:=0.1428000;
+dip5_angle:=0.11428000;
+dip6_angle:=0.0085680;
+
+! Quadrupole components
+
+dip1_k1:=0.06782332;
+dip2_k1:=0.06782332;
+dip3_k1:=0.06782332;
+dip4_k1:=0.06782332;
+dip5_k1:=0.06782332;
+dip6_k1:=0.06782332;
+
+! INJECTION DIPOLES
+! --------------------------------------------------------------
+idip1_angle:=0.0;
+idip2_angle:=0.0;
+idip3_angle:=0.0;
+idip4_angle:=0.0;
+
+! STEERING CORRECTORS (KICKERS)
+! --------------------------------------------------------------
+
+r0hd1_kick:=0.0;
+r2hd1_kick:=0.0;
+r3hd1_kick:=0.0;
+r4hd1_kick:=0.0;
+r5hd1_kick:=0.0;
+r7hd1_kick:=0.0;
+r9hd1_kick:=0.0;
+
+r0vd1_kick:=0.0;
+r2vd1_kick:=0.0;
+r3vd1_kick:=0.0;
+r4vd1_kick:=0.0;
+r5vd1_kick:=0.0;
+r7vd1_kick:=0.0;
+r9vd1_kick:=0.0;
+
+! TRIM QUADRUPOLES
+! --------------------------------------------------------------
+// nominal numbers for 4.31 and 3.83 lattice
+kqtd := .00610063;    
+kqtf := -.01155444;
+
+kqtd_0 := kqtd + HER0qtd;
+kqtd_1 := kqtd + HER1qtd;
+kqtd_2 := kqtd + HER2qtd;
+kqtd_3 := kqtd + HER3qtd;
+kqtd_4 := kqtd + HER4qtd;
+kqtd_5 := kqtd + HER5qtd;
+kqtd_6 := kqtd + HER6qtd;
+kqtd_7 := kqtd + HER7qtd;
+kqtd_8 := kqtd + HER8qtd;
+kqtd_9 := kqtd + HER9qtd;
+    
+kqtf_0:= kqtf + HER0qtf;
+kqtf_1:= kqtf + HER1qtf;
+kqtf_2:= kqtf + HER2qtf;
+kqtf_3:= kqtf + HER3qtf;
+kqtf_4:= kqtf + HER4qtf;
+kqtf_5:= kqtf + HER5qtf;
+kqtf_6:= kqtf + HER6qtf;
+kqtf_7:= kqtf + HER7qtf;
+kqtf_8:= kqtf + HER8qtf;
+kqtf_9:= kqtf + HER9qtf;
+
+! HARMONIC FUNCTIONS
+! --------------------------------------------------------------
+
+! Amplitude and Harmonic for QTD
+a1:=0.000;
+b1:=0.000;
+hn1:=7;
+
+! Amplitude and Harmonic for QTF
+a2:=0.000;
+b2:=0.000;
+hn2:=8;
+
+HER0qtd:=(a1*cos(hn1*(0/10)*2*PI))+(b1*sin(hn1*(0/10)*2*PI));
+HER1qtd:=(a1*cos(hn1*(1/10)*2*PI))+(b1*sin(hn1*(1/10)*2*PI));
+HER2qtd:=(a1*cos(hn1*(2/10)*2*PI))+(b1*sin(hn1*(2/10)*2*PI));
+HER3qtd:=(a1*cos(hn1*(3/10)*2*PI))+(b1*sin(hn1*(3/10)*2*PI));
+HER4qtd:=(a1*cos(hn1*(4/10)*2*PI))+(b1*sin(hn1*(4/10)*2*PI));
+HER5qtd:=(a1*cos(hn1*(5/10)*2*PI))+(b1*sin(hn1*(5/10)*2*PI));
+HER6qtd:=(a1*cos(hn1*(6/10)*2*PI))+(b1*sin(hn1*(6/10)*2*PI));
+HER7qtd:=(a1*cos(hn1*(7/10)*2*PI))+(b1*sin(hn1*(7/10)*2*PI));
+HER8qtd:=(a1*cos(hn1*(8/10)*2*PI))+(b1*sin(hn1*(8/10)*2*PI));
+HER9qtd:=(a1*cos(hn1*(9/10)*2*PI))+(b1*sin(hn1*(9/10)*2*PI));
+
+HER0qtf:=(a2*cos(hn2*(0/10)*2*PI))+(b2*sin(hn2*(0/10)*2*PI));
+HER1qtf:=(a2*cos(hn2*(1/10)*2*PI))+(b2*sin(hn2*(1/10)*2*PI));
+HER2qtf:=(a2*cos(hn2*(2/10)*2*PI))+(b2*sin(hn2*(2/10)*2*PI));
+HER3qtf:=(a2*cos(hn2*(3/10)*2*PI))+(b2*sin(hn2*(3/10)*2*PI));
+HER4qtf:=(a2*cos(hn2*(4/10)*2*PI))+(b2*sin(hn2*(4/10)*2*PI));
+HER5qtf:=(a2*cos(hn2*(5/10)*2*PI))+(b2*sin(hn2*(5/10)*2*PI));
+HER6qtf:=(a2*cos(hn2*(6/10)*2*PI))+(b2*sin(hn2*(6/10)*2*PI));
+HER7qtf:=(a2*cos(hn2*(7/10)*2*PI))+(b2*sin(hn2*(7/10)*2*PI));
+HER8qtf:=(a2*cos(hn2*(8/10)*2*PI))+(b2*sin(hn2*(8/10)*2*PI));
+HER9qtf:=(a2*cos(hn2*(9/10)*2*PI))+(b2*sin(hn2*(9/10)*2*PI));

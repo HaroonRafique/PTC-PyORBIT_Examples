@@ -1,0 +1,82 @@
+TITLE, "Flat file generation for PTC-PyORBIT";
+/***********************************************************************
+ *                  ISIS Proton Synchrotron: Injection
+ *        Create PTC Flat File for PTC-PyORBIT lattice definition
+ *
+ * Last Edit: 15.03.22 Haroon Rafique ISIS Synchrotron Group
+ **********************************************************************/
+CALL, FILE = "ISIS_Lattice/ISIS.injected_beam";
+CALL, FILE = 'ISIS_Lattice/ISIS.elements';
+CALL, FILE = 'ISIS_Lattice/ISIS.strength';
+CALL, FILE = 'ISIS_Lattice/ISIS.sequence';
+
+USE, SEQUENCE=synchrotron;
+
+/***********************************************************************
+ * PTC TWISS - output of beam dynamics parameters for each element in a 
+ * PTC 'Twiss Table'. Note this is not the same as a MAD-X Twiss.
+ **********************************************************************/
+! PTC integration parameters
+
+propagation_method = 2; 
+order_of_integrator = 6;
+
+! propagation_method 1: Drift-Kick-Drift
+! 2 = 2nd order, one kick per integration step, naive.
+! 4 = Ruth-Neri-Yoshida 4th order method, 3 kicks per integration step.
+! 6 = Yoshida 6th order method, 7 kicks per integration step.
+
+! propagation_method 2: Matrix-Kick-Matrix
+! 2 = Euler-like Matrix-Kick-Matrix
+! 4 = Simpson-like (1/6)K-M-(2/3)K-M-(1/6)K
+! 6 = Bode-like (7/90)K-M-(32/90)K-M-(12/90)K-M-(32/90)K-M-(7/90)K
+
+! exact = true ensures SBENDs orbit is correct
+! avoids quadrupole feed-down effects leading to closed orbit distortions
+exact_flag = true;
+
+! time=true: every derivative wrt dp/p needs to be multiplied by the relativistic beta DQ1, DISP1,...) required for flat file generation!
+! time=false: forget about beta and take the value as it is - use for PTC_Twiss 
+time_flag = false;
+
+integration_steps_per_element = 5; ! 3;
+map_order = 5;
+
+! Only call this once or ther errors are erased
+use, sequence=synchrotron;
+
+/***********************************************************************
+ * Next we use the PTC script resplit.ptc - this is used to split
+ * defined elements (dipole, quadrupole, sextupole families etc) in
+ * order to introduce space charge nodes inside their length. See the
+ * file for further information. Then the flat file is generated and 
+ * saved.
+ **********************************************************************/
+ptc_create_universe;
+ptc_create_layout,time=true, model=propagation_method, exact=true, method=order_of_integrator, nst=integration_steps_per_element;
+ptc_script, file="./PTC/resplit.ptc";
+ptc_script, file="./PTC/print_flat_file.ptc";
+select, flag=ptc_twiss, clear; 
+select, flag=ptc_twiss, column=name, s, betx, bety, alfx, alfy, disp1, disp2, disp3, disp4, mu1, mu2, x, px, y, py;
+ptc_twiss, icase=5, no=map_order, deltap_dependency, closed_orbit, file=optimised_flat_file.tfs, table=ptc_twiss;
+ptc_end;
+
+/***********************************************************************
+ * Finally we make some plots
+ **********************************************************************/
+setplot, font=4, xsize=34, ysize=25;
+
+plot, table=ptc_twiss, haxis=s, vaxis=betx, hmin=0, hmax=165, vmin=0, vmax=20, title='Horizontal Beta', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=bety, hmin=0, hmax=165, vmin=0, vmax=20, title='Vertical Beta', colour=4, NOLINE=False, NOVERSION=False;
+! Vertical Scan
+plot, table=ptc_twiss, haxis=s, vaxis=disp1, hmin=0, hmax=165, vmin=0, vmax=10., title='Horizontal Dispersion', colour=2, NOLINE=False, NOVERSION=False;
+! Horizontal Scan
+!plot, table=ptc_twiss, haxis=s, vaxis=disp1, hmin=0, hmax=165, vmin=1.0, vmax=5.5, title='Horizontal Dispersion', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=disp2, hmin=0, hmax=165, vmin=-0.6, vmax=-0.6,  title='Horizontal Dispersion Prime', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=x, hmin=0, hmax=165, title='x', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=y, hmin=0, hmax=165, title='y', colour=4, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=px, hmin=0, hmax=165, title='px', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=py, hmin=0, hmax=165, title='py', colour=4, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=disp3, hmin=0, hmax=165, title='Vertical Dispersion Prime', colour=2, NOLINE=False, NOVERSION=False;
+plot, table=ptc_twiss, haxis=s, vaxis=disp4, hmin=0, hmax=165, title='Vertical Dispersion Prime', colour=4, NOLINE=False, NOVERSION=False;
+
